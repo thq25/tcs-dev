@@ -121,8 +121,8 @@
 
       /* Contact Section */
       #contact {
-        background: #343a40;
-        color: #fff;
+        background: #f8f9fa;
+        color: #000000;
         text-align: center;
       }
 
@@ -144,6 +144,55 @@
       custom-btn {
         background-color: #004aad !important; /* Change this to your desired color */
         /* border-color: ;  Change this to match the background color */
+      }
+      /* USP Points */
+      .fas {
+        color:#004aad;
+      }
+      .icon-box {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        margin-top: 5px;
+        margin-right: 15px; /* Add margin to create gap */
+        font-size: 20px; /* Set a consistent font size for icons */
+      }
+      .text-box strong {
+        
+      }
+      .text-box p {
+        margin-top: 5px;
+        font-size: 0.8rem;
+        color:#474747;
+      }
+      #about h2 {
+        margin-bottom:10px;
+        font-weight: 700;
+      }
+      #about .about p {
+        line-height: 1.8;
+        color:#474747;
+        margin-right: 30px;
+      }
+      footer {
+        background-color: #f9f9f9; /* Light background color */
+        padding: 20px 0; /* Add padding to the top and bottom */
+      }
+
+      .footer-logo {
+        max-height: 50px; /* Set a maximum height for the logo */
+      }
+
+      footer .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      footer p {
+        margin: 0;
+        color: #474747; /* Set the text color */
       }
     </style>
   </head>
@@ -189,8 +238,8 @@
           <div class="row align-items-center">
             <!-- Title and Description (6 columns) -->
             <div class="col-md-6">
-              <h1 class="display-4 mb-4">Performa dan Efisiensi dalam Satu Solusi</h1>
-              <p class="lead mb-4">Hemat biaya cloud dengan Workstation dan NAS on-premise kami. Dapatkan performa tinggi dan layanan teknis lengkap untuk proyek yang lebih cepat dan tepat waktu.</p>
+              <h1 class="display-4 mb-4">Saatnya Bisnis Anda Punya Server Sendiri!</h1>
+              <p class="lead mb-4">Hemat biaya cloud dengan Workstation dan NAS on-premise kami. Dapatkan performa tinggi dan layanan teknis lengkap untuk selesaikan proyek lebih cepat.</p>
               <!--<p class="lead"> Empower your business with cutting-edge, reliable, and secure IT infrastructure solutions designed for the modern enterprise. </p> -->
               <a href="#about" class="btn btn-primary mt-3 custom-btn">Pelajari Lebih Lanjut</a>
             </div>
@@ -207,36 +256,49 @@
         <div class="container">
           <div class="row">
             <!-- About Description (6 columns) -->
-            <div class="col-md-6">
-              <h2>Partner Teknologi Terpercaya untuk Bisnis Anda</h2>
-              <p> Tulus Computing Solutions adalah penyedia solusi komputasi performa tinggi yang dirancang khusus untuk mendukung bisnis kecil dan menengah di Indonesia. Berbasis di Bandung dan Jakarta, kami memahami kebutuhan unik perusahaan Anda yang bekerja dengan deadline ketat dan data proyek besar. Dengan fokus pada workstation dan NAS server-grade, kami menawarkan solusi on-premise yang hemat biaya, andal, dan dapat disesuaikan. Tidak hanya menyediakan perangkat berkualitas, kami juga menghadirkan layanan dukungan teknis penuh, mulai dari konsultasi, instalasi, hingga pemeliharaan, untuk memastikan perangkat Anda selalu bekerja optimal. Kami hadir untuk membantu Anda menyelesaikan proyek lebih cepat, mengelola data dengan efisien, dan mencapai target bisnis Anda dengan lebih baik. </p>
+            <div class="col-md-6 about">
+              <h2>Tentang TCS</h2>
+              <p>Tulus Computing Solutions adalah penyedia solusi komputasi performa tinggi untuk bisnis kecil dan menengah di Indonesia. Berbasis di Bandung dan Jakarta, kami menawarkan workstation dan NAS server-grade yang hemat biaya, andal, dan dapat disesuaikan. Fokus kami adalah menyediakan solusi on-premise dengan dukungan teknis lengkap, mulai dari konsultasi hingga pemeliharaan, memastikan perangkat Anda selalu optimal. Kami siap membantu Anda mempercepat proyek, mengelola data dengan efisien, dan mencapai target bisnis Anda.</p>
             </div>
             <!-- Unique Selling Points (6 columns) -->
-            <div class="col-md-6">              
-              <h3>Why Choose Us?</h3>
+            <div class="col-md-6">
               <ul class="list-unstyled">
-                <li>
-                  <i class="fas fa-cogs text-success"></i> <strong>Solusi Customizable:</strong> Produk dirancang sesuai anggaran dan kebutuhan spesifik proyek Anda.
+                <li class="d-flex align-items-start mb-3">
+                  <div class="icon-box">
+                    <i class="fas fa-cogs"></i>
+                  </div>
+                  <div class="text-box">
+                    <strong>Solusi Customizable:</strong>
+                    <p>Produk dirancang sesuai anggaran dan kebutuhan spesifik proyek Anda.</p>
+                  </div>
                 </li>
-                <li>
-                  <i class="fas fa-server text-success"></i> <strong>Performa Server-Grade:</strong> Workstation dan NAS yang mampu menangani pekerjaan berat tanpa kompromi.
+                <li class="d-flex align-items-start mb-3">
+                  <div class="icon-box">
+                    <i class="fas fa-server"></i>
+                  </div>
+                  <div class="text-box">
+                    <strong>Performa Server-Grade:</strong>
+                    <p>Workstation dan NAS yang mampu menangani pekerjaan berat tanpa kompromi.</p>
+                  </div>
                 </li>
-                <li>
-                  <i class="fas fa-dollar-sign text-success"></i> <strong>Efisiensi Biaya:</strong> Penghematan signifikan dibandingkan solusi berbasis cloud dengan kualitas setara.
+                <li class="d-flex align-items-start mb-3">
+                  <div class="icon-box">
+                    <i class="fas fa-dollar-sign"></i>
+                  </div>
+                  <div class="text-box">
+                    <strong>Efisiensi Biaya:</strong>
+                    <p>Penghematan signifikan dibandingkan solusi berbasis cloud dengan kualitas setara.</p>
+                  </div>
                 </li>
-                <li>
-                  <i class="fas fa-headset text-success"></i> <strong>Dukungan Teknis Penuh:</strong> Layanan end-to-end dari instalasi hingga perawatan untuk memastikan performa optimal.
+                <li class="d-flex align-items-start mb-3">
+                  <div class="icon-box">
+                    <i class="fas fa-headset"></i>
+                  </div>
+                  <div class="text-box">
+                    <strong>Dukungan Teknis Penuh:</strong>
+                    <p>Layanan end-to-end dari instalasi hingga perawatan untuk memastikan performa optimal.</p>
+                  </div>
                 </li>
-                <li>
-                  <i class="fas fa-shield-alt text-success"></i> <strong>Keamanan Data Maksimal:</strong> Solusi on-premise yang memberikan kendali penuh atas data perusahaan Anda.
-                </li>
-                <li>
-                  <i class="fas fa-clock text-success"></i> <strong>Ketahanan Tinggi:</strong> Perangkat server-grade yang dirancang untuk operasional 24/7.
-                </li>
-                <li>
-                  <i class="fas fa-map-marker-alt text-success"></i> <strong>Layanan Lokal:</strong> Berbasis di Bandung dan Jakarta, dengan respons cepat untuk kebutuhan bisnis Anda.
-                </li>
-              </ul>
               </ul>
             </div>
           </div>
@@ -406,24 +468,23 @@
         </div>
       </section>
       <!-- Contact Section -->
-      <section id="contact">
-        <div class="container">
-          <h2>Get in Touch</h2>
-          <p class="lead"> For inquiries, support, or to request a quote, please contact us. </p>
+      <section id="contact" class="contact-section">
+        <div class="container text-center">
+          <h2>Konsultasi Gratis!</h2>
+          <p class="lead">Hubungi kami melalui Whatsapp untuk konsultasi gratis.</p>
           <div class="mt-4">
             <a href="https://wa.me/your-number" class="btn btn-success btn-lg mr-2" target="_blank">
-              <i class="fab fa-whatsapp"></i> Whatsapp </a>
-            <a href="mailto:info@servergradesolutions.com" class="btn btn-primary btn-lg">
-              <i class="fas fa-envelope"></i> Email Us </a>
+              <i class="fab fa-whatsapp"></i> Whatsapp
+            </a>
           </div>
         </div>
       </section>
     </main>
     <!-- Footer -->
     <footer>
-      <div class="container text-center">
-        <img src="images/logo.png" alt="Company Logo" class="mb-2">
-        <p class="mb-0">&copy; 2025 ServerGrade Solutions. All rights reserved.</p>
+      <div class="container d-flex justify-content-between align-items-center">
+        <img src="images/logo.png" alt="Company Logo" class="footer-logo">
+        <p class="mb-0">&copy; 2025 Tulus Tekno. All rights reserved.</p>
       </div>
     </footer>
     <!-- Scripts -->
