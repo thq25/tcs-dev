@@ -145,6 +145,74 @@
         background-color: #004aad !important; /* Change this to your desired color */
         /* border-color: ;  Change this to match the background color */
       }
+
+      /* Solutions Cards */
+      .card-solutions {
+        background-size: cover;
+        background-position: center;
+        height: 250px;
+        position: relative;
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .card-solutions .overlay {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        width: 100%;
+        padding: 10px;
+      }
+
+      .card-solutions .overlay h4,
+      .card-solutions .overlay p {
+        margin: 0;
+        color: #fff;
+      }
+
+      /* Product Cards */
+      .product-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        background: #fff;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .product-card ul li {
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+      }
+
+      .product-price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      .square-card {
+        width: 100%;
+        padding-top: 10%; /* 1:1 Aspect Ratio */
+        position: relative; /* If you want text inside of it */
+      }
+      .icon-small {
+        width: ; /* Adjust the width as needed */
+        height: 50px; /* Adjust the height as needed */
+        margin-right: 5px; /* Adjust the spacing between icons as needed */
+      }
+
       /* USP Points */
       .fas {
         color:#004aad;
@@ -250,7 +318,87 @@
           </div>
         </div>
       </section>
-      
+      <!-- Solutions Section -->
+      <section id="solutions" class="bg-light">
+        <div class="container">
+          <h2 class="text-center">Specialized Solutions</h2>
+          <div class="row">
+            <!-- Industry Card 1 -->
+            <div class="col-md-2 mb-4">
+              <div class="card card-solutions square-card" style="background-image: url('img/ss-fem.png');">
+                <div class="overlay">
+                  <h4>FEA & CFD</h4>
+                </div>
+              </div>
+            </div>
+            <!-- Industry Card 2 -->
+            <div class="col-md-2 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-bim.png');">
+                <div class="overlay">
+                  <h4>Structure & BIM</h4>
+                </div>
+              </div>
+            </div>
+            <!-- Industry Card 3 -->
+            <div class="col-md-2 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-arc.png');">
+                <div class="overlay">
+                  <h4>Architecture</h4>
+                </div>
+              </div>
+            </div>
+            <!-- Industry Card 4 -->
+            <div class="col-md-2 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-anm.png');">
+                <div class="overlay">
+                  <h4>Animation</h4>
+                </div>
+              </div>
+            </div>
+            <!-- Industry Card 5 -->
+            <div class="col-md-2 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-cad.png');">
+                <div class="overlay">
+                  <h4>2D/3D CAD</h4>
+                </div>
+              </div>
+            </div>
+            <!-- Industry Card 6 -->
+            <div class="col-md-2 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-ai.png');">
+                <div class="overlay">
+                  <h4>AI & ML</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- Software Icons List -->
+      <div class="row mt-4">
+        <div class="col text-center">
+          <h3></h3> 
+          <div class="software-icons">
+            <img src="img/soft-logo/1.png" alt="Abaqus" class="icon-small">
+            <img src="img/soft-logo/2.png" alt="Ansys" class="icon-small">
+            <img src="img/soft-logo/3.png" alt="Comsol" class="icon-small">
+            <img src="img/soft-logo/4.png" alt="OpenFOAM" class="icon-small">
+            <img src="img/soft-logo/5.png" alt="Abaqus" class="icon-small">
+            <img src="img/soft-logo/6.png" alt="Ansys" class="icon-small">
+            <img src="img/soft-logo/7.png" alt="Comsol" class="icon-small">
+            <img src="img/soft-logo/8.png" alt="OpenFOAM" class="icon-small">
+            <img src="img/soft-logo/9.png" alt="Abaqus" class="icon-small">
+            <img src="img/soft-logo/10.png" alt="Ansys" class="icon-small">
+            <img src="img/soft-logo/11.png" alt="Comsol" class="icon-small">
+            <img src="img/soft-logo/12.png" alt="OpenFOAM" class="icon-small">
+            <img src="img/soft-logo/13.png" alt="Abaqus" class="icon-small">
+            <img src="img/soft-logo/14.png" alt="Ansys" class="icon-small">
+            <img src="img/soft-logo/15.png" alt="Comsol" class="icon-small">
+            <img src="img/soft-logo/16.png" alt="OpenFOAM" class="icon-small">
+            <img src="img/soft-logo/17.png" alt="OpenFOAM" class="icon-small">
+          </div>
+        </div>
+      </div>  
+    </section>
       <!-- About Section -->
       <section id="about">
         <div class="container">
@@ -300,53 +448,6 @@
                   </div>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Solutions Section -->
-      <section id="solutions" class="bg-light">
-        <div class="container">
-          <h2 class="text-center">Industry Tailored Solutions</h2>
-          <div class="row">
-            <!-- Industry Card 1 -->
-            <div class="col-md-4 mb-4">
-              <div class="card card-solutions" style="background-image: url('images/healthcare.jpg');">
-                <div class="overlay">
-                  <h4>Engineering</h4>
-                  <p>
-                    <i class="fas fa-heartbeat"></i>
-                    <i class="fas fa-user-md"></i>
-                    <i class="fas fa-hospital"></i>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- Industry Card 2 -->
-            <div class="col-md-4 mb-4">
-              <div class="card card-solutions" style="background-image: url('images/finance.jpg');">
-                <div class="overlay">
-                  <h4>Creative</h4>
-                  <p>
-                    <i class="fas fa-chart-line"></i>
-                    <i class="fas fa-university"></i>
-                    <i class="fas fa-coins"></i>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- Industry Card 3 -->
-            <div class="col-md-4 mb-4">
-              <div class="card card-solutions" style="background-image: url('images/education.jpg');">
-                <div class="overlay">
-                  <h4>Research & Education</h4>
-                  <p>
-                    <i class="fas fa-graduation-cap"></i>
-                    <i class="fas fa-book"></i>
-                    <i class="fas fa-school"></i>
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
