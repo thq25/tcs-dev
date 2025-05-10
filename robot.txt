@@ -1,10 +1,23 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /login/
-Disallow: /register/
-Disallow: /cgi-bin/
-Disallow: /tmp/
-Disallow: /private/
-Disallow: /img/
+Allow: /
+Disallow: /img/favicon/
+Disallow: /soft-logo/
 
+# Allow all bots to access CSS, JS, and image files
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+
+# Block certain bots that might overload your server
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemap location
 Sitemap: https://tuluscs.com/sitemap.xml
