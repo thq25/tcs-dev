@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
-    <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMHZ07VQ35"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-ZMHZ07VQ35');
-      </script>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tulus Computing Solutions - Jasa perakitan server HPC, workstation, dan NAS server-grade berkualitas tinggi dengan harga terjangkau. Solusi komputasi performa tinggi untuk bisnis Anda.">
+    <meta name="keywords" content="server HPC, workstation, NAS, high performance computing, server murah, jasa rakit server, server Indonesia">
+    <meta name="author" content="Tulus Computing Solutions">
+    <meta property="og:title" content="Tulus Computing Solutions - Jasa Rakit Server HPC Workstation & NAS">
+    <meta property="og:description" content="Jasa perakitan server HPC, workstation, dan NAS server-grade berkualitas tinggi dengan harga terjangkau. Solusi komputasi performa tinggi untuk bisnis Anda.">
+    <meta property="og:image" content="img/og-image.jpg">
+    <meta property="og:url" content="https://tuluscs.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>Tulus Computing Solutions - Jasa Rakit Server HPC Workstation & NAS</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMHZ07VQ35"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZMHZ07VQ35', {
+        'page_title': 'Homepage',
+        'page_location': window.location.href,
+        'page_path': window.location.pathname
+      });
+      
+      // Custom event tracking function
+      function trackEvent(category, action, label) {
+        gtag('event', action, {
+          'event_category': category,
+          'event_label': label
+        });
+      }
+    </script>
+    
     <!-- Meta Pixel Code -->
     <script>
       !function(f,b,e,v,n,t,s)
@@ -22,71 +49,193 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '685501847472666');
       fbq('track', 'PageView');
+      
+      // Custom event tracking function for Facebook Pixel
+      function trackPixelEvent(eventName, params) {
+        fbq('trackCustom', eventName, params);
+      }
     </script>
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=685501847472666&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
-    <meta charset="UTF-8">
-    <!--Favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    
+    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <!-- End Favicon -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tulus Computing Solutions - Jasa Rakit Server HPC Workstation & NAS</title>
-    <meta name="description" content="jasa perakitan dan instalasi Server HPC (High-Performance Computing), Workstation, dan NAS (Network-Attached Storage) server-grade hemat biaya">
+    <meta name="theme-color" content="#004aad">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" as="style">
+    <link rel="preload" href="img/TCS.png" as="image">
+    <link rel="preload" href="img/hero-shadow.png" as="image">
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Inline Custom CSS -->
     <style>
       /* Global Styles */
-      body {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        scroll-behavior: smooth;
-        padding-top: 70px !important;
+      :root {
+        --primary-color: #004aad;
+        --secondary-color: #0073e6;
+        --accent-color: #25d366;
+        --text-color: #333333;
+        --text-secondary: #474747;
+        --light-bg: #f8f9fa;
+        --white: #ffffff;
+        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
       }
-
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        padding-top: 76px;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      
+      p {
+        margin-bottom: 1rem;
+      }
+      
       section {
         padding: 80px 0;
       }
-
-      h2 {
+      
+      .section-title {
+        position: relative;
         margin-bottom: 40px;
+        text-align: center;
       }
-
-      /* Navbar override (extra padding for fixed nav) */
-      body {
-        padding-top: 0px;
+      
+      .section-title:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--primary-color);
+        margin: 15px auto 0;
+        border-radius: 2px;
       }
-
+      
+      .btn {
+        border-radius: 4px;
+        padding: 10px 24px;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+      
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+      
+      .btn-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+      
+      .btn-success {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+      }
+      
+      .btn-success:hover {
+        background-color: #1fbd59;
+        border-color: #1fbd59;
+        transform: translateY(-2px);
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Navbar Styles */
       .navbar {
-        background-color: #ffffff;
+        background-color: var(--white);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+        transition: var(--transition);
       }
-
+      
+      .navbar-brand img {
+        max-height: 45px;
+        transition: var(--transition);
+      }
+      
+      .navbar-light .navbar-nav .nav-link {
+        color: var(--text-color);
+        font-weight: 500;
+        padding: 8px 16px;
+        transition: var(--transition);
+      }
+      
+      .navbar-light .navbar-nav .nav-link:hover,
+      .navbar-light .navbar-nav .nav-link.active {
+        color: var(--primary-color);
+      }
+      
+      .language-switcher {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+      }
+      
+      .language-btn {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-weight: 500;
+        padding: 5px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      
+      .language-btn.active {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+      
+      .language-btn:hover {
+        color: var(--primary-color);
+      }
+      
       /* Floating Whatsapp Button */
       .whatsapp-btn {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background: #25d366;
-        color: #fff;
+        background: var(--accent-color);
+        color: var(--white);
         border-radius: 50%;
         width: 60px;
         height: 60px;
@@ -95,657 +244,1351 @@
         justify-content: center;
         font-size: 24px;
         z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: var(--transition);
       }
-
+      
+      .whatsapp-btn:hover {
+        transform: scale(1.1);
+        color: var(--white);
+      }
+      
       /* Hero Section */
       #hero {
-        background: #f8f9fa;
-      }
-
-      /* About Section */
-      #about ul li {
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-      }
-
-      /* Solutions Cards */
-      .card-solutions {
-        background-size: cover;
-        background-position: center;
-        height: 250px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         position: relative;
-        border: none;
-        border-radius: 8px;
         overflow: hidden;
       }
-
-      .card-solutions .overlay {
+      
+      #hero::before {
+        content: '';
         position: absolute;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.6);
-        width: 100%;
-        padding: 10px;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(0, 74, 173, 0.1);
+        z-index: 0;
       }
-
-      .card-solutions .overlay h4,
-      .card-solutions .overlay p {
-        margin: 0;
-        color: #fff;
+      
+      #hero::after {
+        content: '';
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(0, 74, 173, 0.05);
+        z-index: 0;
       }
-
-      /* Product Cards */
-      .product-card {
-        border: 1px solid #e0e0e0;
+      
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+      
+      .hero-title {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+      }
+      
+      .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+      }
+      
+      .hero-image {
+        position: relative;
+        z-index: 1;
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
+      
+      /* Trust Indicators */
+      .trust-indicators {
+        background-color: var(--white);
         border-radius: 8px;
-        overflow: hidden;
-        transition: transform 0.3s;
-        background: #fff;
+        box-shadow: var(--card-shadow);
+        padding: 20px;
+        margin-top: -40px;
+        position: relative;
+        z-index: 10;
       }
-
-      .product-card:hover {
-        transform: translateY(-5px);
+      
+      .trust-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
       }
-
-      .product-card img {
-        width: 100%;
-        height: auto;
-        display: block;
+      
+      .trust-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 74, 173, 0.1);
+        border-radius: 50%;
+        margin-right: 15px;
+        color: var(--primary-color);
       }
-
-      .product-card ul li {
-        margin-bottom: 8px;
+      
+      .trust-text {
+        font-weight: 600;
         font-size: 0.9rem;
       }
-
-      .product-price {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #007bff;
-        margin-bottom: 10px;
+      
+      /* Solutions Section */
+      #solutions {
+        background-color: var(--light-bg);
       }
-
-      /* Contact Section */
-      #contact {
-        background: #f8f9fa;
-        color: #000000;
+      
+      .solutions-header {
         text-align: center;
+        margin-bottom: 40px;
       }
-
-      /* Footer */
-      footer {
-        background: #222;
-        color: #ccc;
-        padding: 20px 0;
-      }
-
-      footer img {
-        max-height: 50px;
-      }
-
-      .display-4 {
-        font-weight: 500;
-        font-size: 3.2rem;
-      }
-      custom-btn {
-        background-color: #004aad !important; /* Change this to your desired color */
-        /* border-color: ;  Change this to match the background color */
-      }
-
-      /* Solutions Cards */
+      
       .card-solutions {
         background-size: cover;
         background-position: center;
-        height: 250px;
+        height: 200px;
         position: relative;
         border: none;
         border-radius: 8px;
         overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
       }
-
+      
+      .card-solutions:hover {
+        transform: translateY(-5px);
+      }
+      
       .card-solutions .overlay {
         position: absolute;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.6);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
         width: 100%;
-        padding: 10px;
+        padding: 20px;
+        transition: var(--transition);
       }
-
-      .card-solutions .overlay h4,
-      .card-solutions .overlay p {
+      
+      .card-solutions:hover .overlay {
+        background: linear-gradient(to top, rgba(0, 74, 173, 0.8) 0%, rgba(0, 74, 173, 0) 100%);
+      }
+      
+      .card-solutions .overlay h4 {
         margin: 0;
-        color: #fff;
-      }
-
-      /* Product Cards */
-      .product-card {
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        overflow: hidden;
-        transition: transform 0.3s;
-        background: #fff;
-      }
-
-      .product-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .product-card img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      .product-card ul li {
-        margin-bottom: 8px;
-        font-size: 0.6rem;
-      }
-
-      .product-price {
+        color: var(--white);
         font-size: 1.2rem;
-        font-weight: bold;
-        color: #007bff;
-        margin-bottom: 10px;
       }
-
-      .square-card {
-        width: 100%;
-        padding-top: 10%; /* 1:1 Aspect Ratio */
-        position: relative; /* If you want text inside of it */
+      
+      .software-icons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        gap: 15px;
       }
+      
       .icon-small {
-        /*width: ;  Adjust the width as needed */
-        height: 50px; /* Adjust the height as needed */
-        margin-right: 5px; /* Adjust the spacing between icons as needed */
+        height: 40px;
+        filter: grayscale(100%);
+        opacity: 0.7;
+        transition: var(--transition);
       }
-
-      /* USP Points */
-      .fas {
-        color:#004aad;
+      
+      .icon-small:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.1);
       }
-      .icon-box {
+      
+      /* About Section */
+      #about {
+        background-color: var(--white);
+      }
+      
+      .about-content {
+        margin-bottom: 30px;
+      }
+      
+      .about-content p {
+        color: var(--text-secondary);
+        line-height: 1.8;
+      }
+      
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+      }
+      
+      .feature-icon {
         width: 50px;
         height: 50px;
         display: flex;
+        align-items: center;
         justify-content: center;
-        margin-top: 5px;
-        margin-right: 15px; /* Add margin to create gap */
-        font-size: 20px; /* Set a consistent font size for icons */
+        margin-right: 15px;
+        font-size: 20px;
+        color: var(--primary-color);
       }
       
-      .text-box p {
-        margin-top: 5px;
-        font-size: 0.8rem;
-        color:#474747;
+      .feature-text h4 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
       }
-      #about h2 {
-        margin-bottom:10px;
+      
+      .feature-text p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+      
+      /* Products Section */
+      #products {
+        background-color: var(--light-bg);
+      }
+      
+      .product-category {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+      
+      .product-category:after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: var(--primary-color);
+        margin-top: 8px;
+      }
+      
+      .product-card {
+        background-color: var(--white);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .product-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+      
+      .product-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .product-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+      
+      .product-price {
+        font-size: 1.1rem;
         font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 15px;
       }
-      #about .about p {
-        line-height: 1.8;
-        color:#474747;
-        margin-right: 30px;
+      
+      .product-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
       }
+      
+      .product-features li {
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: flex-start;
+      }
+      
+      .product-features i {
+        color: #28a745;
+        margin-right: 8px;
+        margin-top: 4px;
+      }
+      
+      /* Testimonials Section */
+      #testimonials {
+        background-color: var(--white);
+      }
+      
+      .testimonial-card {
+        background-color: var(--light-bg);
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 20px;
+        position: relative;
+        box-shadow: var(--card-shadow);
+      }
+      
+      .testimonial-card:before {
+        content: '\201C';
+        font-size: 60px;
+        color: rgba(0, 74, 173, 0.1);
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        font-family: Georgia, serif;
+      }
+      
+      .testimonial-content {
+        position: relative;
+        z-index: 1;
+      }
+      
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 15px;
+      }
+      
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+      
+      .testimonial-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+        object-fit: cover;
+      }
+      
+      .testimonial-info h5 {
+        margin: 0;
+        font-size: 1rem;
+      }
+      
+      .testimonial-info p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+      
+      /* Contact Section */
+      #contact {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        text-align: center;
+      }
+      
+      .contact-title {
+        margin-bottom: 20px;
+      }
+      
+      .contact-description {
+        max-width: 600px;
+        margin: 0 auto 30px;
+      }
+      
+      .contact-btn {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+      }
+      
+      /* Footer */
       footer {
-        background-color: #f9f9f9; /* Light background color */
-        padding: 20px 0; /* Add padding to the top and bottom */
+        background-color: var(--white);
+        padding: 30px 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
       }
-
+      
       .footer-logo {
-        max-height: 50px; /* Set a maximum height for the logo */
+        max-height: 40px;
       }
-
-      footer .container {
+      
+      .footer-content {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
-
-      footer p {
-        margin: 0;
-        color: #474747; /* Set the text color */
+      
+      .footer-links {
+        display: flex;
+        gap: 20px;
+      }
+      
+      .footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+      
+      .footer-links a:hover {
+        color: var(--primary-color);
+      }
+      
+      .footer-copyright {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 991px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        
+        .hero-image {
+          margin-top: 30px;
+        }
+        
+        .trust-indicators {
+          margin-top: 20px;
+        }
+      }
+      
+      @media (max-width: 767px) {
+        section {
+          padding: 60px 0;
+        }
+        
+        .hero-title {
+          font-size: 2rem;
+        }
+        
+        .section-title {
+          margin-bottom: 30px;
+        }
+        
+        .card-solutions {
+          height: 180px;
+          margin-bottom: 20px;
+        }
+        
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+        
+        .footer-links {
+          margin: 15px 0;
+        }
+      }
+      
+      /* Language Specific Styles */
+      [lang="en"] .id-content {
+        display: none;
+      }
+      
+      [lang="id"] .en-content {
+        display: none;
       }
     </style>
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="img/TCS.png" alt="Company Logo" style="max-height:50px;"></a>
+        <a class="navbar-brand" href="#" onclick="trackEvent('Navigation', 'Logo Click', 'Header')">
+          <img src="img/TCS.png" alt="Tulus Computing Solutions Logo" loading="lazy">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#hero">Home</a>
+              <a class="nav-link active" href="#hero" onclick="trackEvent('Navigation', 'Menu Click', 'Home')">
+                <span class="id-content">Beranda</span>
+                <span class="en-content">Home</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#solutions">Solutions</a>
+              <a class="nav-link" href="#solutions" onclick="trackEvent('Navigation', 'Menu Click', 'Solutions')">
+                <span class="id-content">Solusi</span>
+                <span class="en-content">Solutions</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+              <a class="nav-link" href="#about" onclick="trackEvent('Navigation', 'Menu Click', 'About')">
+                <span class="id-content">Tentang Kami</span>
+                <span class="en-content">About Us</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#products">Products</a>
+              <a class="nav-link" href="#products" onclick="trackEvent('Navigation', 'Menu Click', 'Products')">
+                <span class="id-content">Produk</span>
+                <span class="en-content">Products</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
+              <a class="nav-link" href="#testimonials" onclick="trackEvent('Navigation', 'Menu Click', 'Testimonials')">
+                <span class="id-content">Testimoni</span>
+                <span class="en-content">Testimonials</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact" onclick="trackEvent('Navigation', 'Menu Click', 'Contact')">
+                <span class="id-content">Kontak</span>
+                <span class="en-content">Contact</span>
+              </a>
             </li>
           </ul>
+          <div class="language-switcher">
+            <button id="id-lang" class="language-btn active" onclick="switchLanguage('id'); trackEvent('Language', 'Switch', 'Indonesian');">ID</button>
+            <span class="mx-1">|</span>
+            <button id="en-lang" class="language-btn" onclick="switchLanguage('en'); trackEvent('Language', 'Switch', 'English');">EN</button>
+          </div>
         </div>
       </div>
     </nav>
+
     <!-- Floating Whatsapp Button -->
-    <a href="https://wa.me/6287742253065?text=Halo%20Tulus%20Computing%20Solutions%2C%20saya%20tertarik%20untuk%20build%20server.%20Bisa%20konsultasi%20untuk%20kebutuhan%20saya%3F" class="whatsapp-btn" target="_blank" title="Chat on Whatsapp">
+    <a href="https://wa.me/6287742253065?text=Halo%20Tulus%20Computing%20Solutions%2C%20saya%20tertarik%20untuk%20build%20server.%20Bisa%20konsultasi%20untuk%20kebutuhan%20saya%3F" class="whatsapp-btn" target="_blank" title="Chat on Whatsapp" onclick="trackEvent('Contact', 'WhatsApp Click', 'Floating Button'); trackPixelEvent('WhatsAppContact', {position: 'floating'});">
       <i class="fab fa-whatsapp"></i>
     </a>
+
     <!-- Main Content -->
     <main>
       <!-- Hero Section -->
       <section id="hero">
         <div class="container">
           <div class="row align-items-center">
-            <!-- Title and Description (6 columns) -->
-            <div class="col-md-6">
-              <h1 class="display-4 mb-4">Saatnya Bisnis Anda Punya Server Sendiri!</h1>
-              <p class="lead mb-4">Hemat biaya cloud dengan server-grade HPC, Workstation, dan NAS on-premise dengan harga terjangkau dari kami. Dapatkan performa tinggi dan layanan teknis lengkap untuk selesaikan proyek lebih cepat.</p>
-              <!--<p class="lead"> Empower your business with cutting-edge, reliable, and secure IT infrastructure solutions designed for the modern enterprise. </p> -->
-              <a href="#about" class="btn btn-primary mt-3 custom-btn">Pelajari Lebih Lanjut</a>
+            <div class="col-lg-6 hero-content">
+              <h1 class="hero-title">
+                <span class="id-content">Saatnya Bisnis Anda Punya Server Sendiri!</span>
+                <span class="en-content">Time for Your Business to Have Its Own Server!</span>
+              </h1>
+              <p class="hero-subtitle">
+                <span class="id-content">Hemat biaya cloud dengan server-grade HPC, Workstation, dan NAS on-premise dengan harga terjangkau. Dapatkan performa tinggi dan layanan teknis lengkap untuk selesaikan proyek lebih cepat.</span>
+                <span class="en-content">Save cloud costs with affordable server-grade HPC, Workstation, and on-premise NAS. Get high performance and complete technical support to complete projects faster.</span>
+              </p>
+              <a href="#contact" class="btn btn-primary btn-lg" onclick="trackEvent('CTA', 'Button Click', 'Hero Learn More'); trackPixelEvent('LearnMore', {section: 'hero'});">
+                <span class="id-content">Konsultasi Gratis</span>
+                <span class="en-content">Free Consultation</span>
+              </a>
             </div>
-            <!-- Hero Image (6 columns) -->
-            <div class="col-md-6">
-              <img src="img/hero-shadow.png" alt="Affordable server for small businesses" class="img-fluid">
+            <div class="col-lg-6">
+              <div class="hero-image">
+                <img src="img/hero-shadow.png" alt="Server solutions for businesses" loading="lazy">
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- Trust Indicators -->
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="trust-indicators">
+              <div class="row">
+                <div class="col-md-3 col-6">
+                  <div class="trust-item">
+                    <div class="trust-icon">
+                      <i class="fas fa-check"></i>
+                    </div>
+                    <div class="trust-text">
+                      <span class="id-content">Kualitas Server-Grade</span>
+                      <span class="en-content">Server-Grade Quality</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="trust-item">
+                    <div class="trust-icon">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="trust-text">
+                      <span class="id-content">Garansi Komponen</span>
+                      <span class="en-content">Component Warranty</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="trust-item">
+                    <div class="trust-icon">
+                      <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="trust-text">
+                      <span class="id-content">Dukungan Teknis 24/7</span>
+                      <span class="en-content">24/7 Technical Support</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="trust-item">
+                    <div class="trust-icon">
+                      <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="trust-text">
+                      <span class="id-content">Instalasi & Setup</span>
+                      <span class="en-content">Installation & Setup</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Solutions Section -->
-      <section id="solutions" class="bg-light">
+      <section id="solutions">
         <div class="container">
-          <h2 class="text-right">Specialized Solutions</h2>
+          <h2 class="section-title">
+            <span class="id-content">Solusi Spesialis</span>
+            <span class="en-content">Specialized Solutions</span>
+          </h2>
+          
+          <div class="solutions-header">
+            <p class="lead">
+              <span class="id-content">Kami menyediakan solusi komputasi performa tinggi untuk berbagai kebutuhan industri</span>
+              <span class="en-content">We provide high-performance computing solutions for various industry needs</span>
+            </p>
+          </div>
+          
           <div class="row">
             <!-- Industry Card 1 -->
-            <div class="col-md-2 mb-4">
-              <div class="card card-solutions square-card" style="background-image: url('img/ss-fem.png');" alt="Finite Element Analysis & Computational Fluid Dynamics Software">
+            <div class="col-md-4 col-sm-6 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-fem.png');" onclick="trackEvent('Solutions', 'Card Click', 'FEA & CFD')">
                 <div class="overlay">
-                  <h4>FEA & CFD</h4>
+                  <h4>
+                    <span class="id-content">FEA & CFD</span>
+                    <span class="en-content">FEA & CFD</span>
+                  </h4>
                 </div>
               </div>
             </div>
             <!-- Industry Card 2 -->
-            <div class="col-md-2 mb-4">
-              <div class="card card-solutions" style="background-image: url('img/ss-bim.png');" alt="Structure Analysis & BIM Software">
+            <div class="col-md-4 col-sm-6 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-bim.png');" onclick="trackEvent('Solutions', 'Card Click', 'Structure & BIM')">
                 <div class="overlay">
-                  <h4>Structure & BIM</h4>
+                  <h4>
+                    <span class="id-content">Struktur & BIM</span>
+                    <span class="en-content">Structure & BIM</span>
+                  </h4>
                 </div>
               </div>
             </div>
             <!-- Industry Card 3 -->
-            <div class="col-md-2 mb-4">
-              <div class="card card-solutions" style="background-image: url('img/ss-arc.png');" alt="Architecture Software">
+            <div class="col-md-4 col-sm-6 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-arc.png');" onclick="trackEvent('Solutions', 'Card Click', 'Architecture')">
                 <div class="overlay">
-                  <h4>Architecture</h4>
+                  <h4>
+                    <span class="id-content">Arsitektur</span>
+                    <span class="en-content">Architecture</span>
+                  </h4>
                 </div>
               </div>
             </div>
             <!-- Industry Card 4 -->
-            <div class="col-md-2 mb-4">
-              <div class="card card-solutions" style="background-image: url('img/ss-anm.png');" alt="Animation & Rendering Software">
+            <div class="col-md-4 col-sm-6 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-anm.png');" onclick="trackEvent('Solutions', 'Card Click', 'Animation')">
                 <div class="overlay">
-                  <h4>Animation</h4>
+                  <h4>
+                    <span class="id-content">Animasi & Rendering</span>
+                    <span class="en-content">Animation & Rendering</span>
+                  </h4>
                 </div>
               </div>
             </div>
             <!-- Industry Card 5 -->
-            <div class="col-md-2 mb-4">
-              <div class="card card-solutions" style="background-image: url('img/ss-cad.png');" alt="CAD Design Software">
+            <div class="col-md-4 col-sm-6 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-cad.png');" onclick="trackEvent('Solutions', 'Card Click', '2D/3D CAD')">
                 <div class="overlay">
-                  <h4>2D/3D CAD</h4>
+                  <h4>
+                    <span class="id-content">2D/3D CAD</span>
+                    <span class="en-content">2D/3D CAD</span>
+                  </h4>
                 </div>
               </div>
             </div>
             <!-- Industry Card 6 -->
-            <div class="col-md-2 mb-4">
-              <div class="card card-solutions" style="background-image: url('img/ss-ai.png');" alt="Machine Learning & AI Software">
+            <div class="col-md-4 col-sm-6 mb-4">
+              <div class="card card-solutions" style="background-image: url('img/ss-ai.png');" onclick="trackEvent('Solutions', 'Card Click', 'AI & ML')">
                 <div class="overlay">
-                  <h4>AI & ML</h4>
+                  <h4>
+                    <span class="id-content">AI & Machine Learning</span>
+                    <span class="en-content">AI & Machine Learning</span>
+                  </h4>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      <!-- Software Icons List -->
-      <div class="row mt-4">
-        <div class="col text-center">
-          <h3></h3> 
+          
+          <!-- Software Icons List -->
           <div class="software-icons">
-            <img src="img/soft-logo/1.png" alt="Ansys" class="icon-small">
-            <img src="img/soft-logo/2.png" alt="Abaqus" class="icon-small">
-            <img src="img/soft-logo/3.png" alt="Comsol" class="icon-small">
-            <img src="img/soft-logo/4.png" alt="OpenFOAM" class="icon-small">
-            <img src="img/soft-logo/5.png" alt="Revit" class="icon-small">
-            <img src="img/soft-logo/6.png" alt="Staad Pro" class="icon-small">
-            <img src="img/soft-logo/7.png" alt="SAP2000" class="icon-small">
-            <img src="img/soft-logo/8.png" alt="Navisworks" class="icon-small">
-            <img src="img/soft-logo/9.png" alt="SketchUP" class="icon-small">
-            <img src="img/soft-logo/10.png" alt="Ansys" class="icon-small">
-            <img src="img/soft-logo/11.png" alt="AutoCAD" class="icon-small">
-            <img src="img/soft-logo/12.png" alt="Blender" class="icon-small">
-            <img src="img/soft-logo/13.png" alt="V-Ray" class="icon-small">
-            <img src="img/soft-logo/14.png" alt="Adobe Premiere" class="icon-small">
-            <img src="img/soft-logo/15.png" alt="Lumion" class="icon-small">
-            <img src="img/soft-logo/16.png" alt="Tensorflow" class="icon-small">
-            <img src="img/soft-logo/17.png" alt="PyTorch" class="icon-small">
+            <img src="img/soft-logo/1.png" alt="Ansys" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/2.png" alt="Abaqus" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/3.png" alt="Comsol" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/4.png" alt="OpenFOAM" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/5.png" alt="Revit" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/6.png" alt="Staad Pro" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/7.png" alt="SAP2000" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/8.png" alt="Navisworks" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/9.png" alt="SketchUP" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/10.png" alt="Ansys" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/11.png" alt="AutoCAD" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/12.png" alt="Blender" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/13.png" alt="V-Ray" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/14.png" alt="Adobe Premiere" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/15.png" alt="Lumion" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/16.png" alt="Tensorflow" class="icon-small" loading="lazy">
+            <img src="img/soft-logo/17.png" alt="PyTorch" class="icon-small" loading="lazy">
           </div>
         </div>
-      </div>  
-    </section>
+      </section>
+
       <!-- About Section -->
       <section id="about">
         <div class="container">
+          <h2 class="section-title">
+            <span class="id-content">Tentang Tulus Computing Solutions</span>
+            <span class="en-content">About Tulus Computing Solutions</span>
+          </h2>
+          
           <div class="row">
-            <!-- About Description (6 columns) -->
-            <div class="col-md-6 about">
-              <h2>Apa itu TCS?</h2>
-              <p>Tulus Computing Solutions adalah penyedia solusi komputasi performa tinggi dengan harga terjangkau. Berbasis di Bandung dan Jakarta, kami menawarkan jasa perakitan dan instalasi Server HPC (High-Performance Computing), Workstation, dan NAS (Network-Attached Storage) server-grade yang hemat biaya, andal, dan dapat di-kostumasi sesuai kebutuhan. Fokus kami adalah menyediakan solusi on-premise dengan dukungan teknis lengkap, mulai dari konsultasi hingga pemeliharaan, memastikan perangkat Anda selalu optimal. Kami siap membantu Anda mempercepat proyek, mengelola data dengan efisien, dan meningkatkan performa pekerjaan tim anda dengan solusi komputasi performa tinggi kami.</p>
+            <!-- About Description -->
+            <div class="col-lg-6 about-content">
+              <p>
+                <span class="id-content">Tulus Computing Solutions adalah penyedia solusi komputasi performa tinggi dengan harga terjangkau. Berbasis di Bandung dan Jakarta, kami menawarkan jasa perakitan dan instalasi Server HPC (High-Performance Computing), Workstation, dan NAS (Network-Attached Storage) server-grade yang hemat biaya, andal, dan dapat di-kostumasi sesuai kebutuhan.</span>
+                <span class="en-content">Tulus Computing Solutions is a provider of affordable high-performance computing solutions. Based in Bandung and Jakarta, we offer assembly and installation services for cost-effective, reliable, and customizable server-grade HPC (High-Performance Computing), Workstation, and NAS (Network-Attached Storage).</span>
+              </p>
+              <p>
+                <span class="id-content">Fokus kami adalah menyediakan solusi on-premise dengan dukungan teknis lengkap, mulai dari konsultasi hingga pemeliharaan, memastikan perangkat Anda selalu optimal. Kami siap membantu Anda mempercepat proyek, mengelola data dengan efisien, dan meningkatkan performa pekerjaan tim anda dengan solusi komputasi performa tinggi kami.</span>
+                <span class="en-content">Our focus is providing on-premise solutions with complete technical support, from consultation to maintenance, ensuring your devices are always optimal. We are ready to help you accelerate projects, manage data efficiently, and improve your team's performance with our high-performance computing solutions.</span>
+              </p>
             </div>
-            <!-- Unique Selling Points (6 columns) -->
-            <div class="col-md-6">
-              <ul class="list-unstyled">
-                <li class="d-flex align-items-start mb-3">
-                  <div class="icon-box">
-                    <i class="fas fa-cogs"></i>
-                  </div>
-                  <div class="text-box">
-                    <strong>Solusi Customizable</strong>
-                    <p>Server dapat di-desain sesuai anggaran dan kebutuhan spesifik proyek Anda.</p>
-                  </div>
-                </li>
-                <li class="d-flex align-items-start mb-3">
-                  <div class="icon-box">
-                    <i class="fas fa-server"></i>
-                  </div>
-                  <div class="text-box">
-                    <strong>Performa Server-Grade</strong>
-                    <p>Menggunakan komponen yang mampu bekerja dalam jangka waktu panjang dengan garansi.</p>
-                  </div>
-                </li>
-                <li class="d-flex align-items-start mb-3">
-                  <div class="icon-box">
-                    <i class="fas fa-dollar-sign"></i>
-                  </div>
-                  <div class="text-box">
-                    <strong>Efisiensi Biaya</strong>
-                    <p>Penghematan dibandingkan solusi berbasis cloud dengan fungsi yang lebih cost-effective.</p>
-                  </div>
-                </li>
-                <li class="d-flex align-items-start mb-3">
-                  <div class="icon-box">
-                    <i class="fas fa-headset"></i>
-                  </div>
-                  <div class="text-box">
-                    <strong>Full Technical Support</strong>
-                    <p>Layanan end-to-end dari instalasi hingga perawatan untuk memastikan performa optimal.</p>
-                  </div>
-                </li>
-              </ul>
+            
+            <!-- Unique Selling Points -->
+            <div class="col-lg-6">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-cogs"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>
+                    <span class="id-content">Solusi Customizable</span>
+                    <span class="en-content">Customizable Solutions</span>
+                  </h4>
+                  <p>
+                    <span class="id-content">Server dapat di-desain sesuai anggaran dan kebutuhan spesifik proyek Anda.</span>
+                    <span class="en-content">Servers can be designed according to your budget and specific project needs.</span>
+                  </p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-server"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>
+                    <span class="id-content">Performa Server-Grade</span>
+                    <span class="en-content">Server-Grade Performance</span>
+                  </h4>
+                  <p>
+                    <span class="id-content">Menggunakan komponen yang mampu bekerja dalam jangka waktu panjang dengan garansi.</span>
+                    <span class="en-content">Using components capable of working for extended periods with warranty.</span>
+                  </p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>
+                    <span class="id-content">Efisiensi Biaya</span>
+                    <span class="en-content">Cost Efficiency</span>
+                  </h4>
+                  <p>
+                    <span class="id-content">Penghematan dibandingkan solusi berbasis cloud dengan fungsi yang lebih cost-effective.</span>
+                    <span class="en-content">Savings compared to cloud-based solutions with more cost-effective functionality.</span>
+                  </p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-headset"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>
+                    <span class="id-content">Dukungan Teknis Lengkap</span>
+                    <span class="en-content">Full Technical Support</span>
+                  </h4>
+                  <p>
+                    <span class="id-content">Layanan end-to-end dari instalasi hingga perawatan untuk memastikan performa optimal.</span>
+                    <span class="en-content">End-to-end service from installation to maintenance to ensure optimal performance.</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
       <!-- Products Section -->
       <section id="products">
         <div class="container">
-          <h2 class="text-center">Our Products</h2>
+          <h2 class="section-title">
+            <span class="id-content">Produk Kami</span>
+            <span class="en-content">Our Products</span>
+          </h2>
+          
           <!-- Workstations -->
-          <h3 class="mt-5 mb-4">HPC Workstations</h3>
+          <h3 class="product-category">
+            <span class="id-content">HPC Workstations</span>
+            <span class="en-content">HPC Workstations</span>
+          </h3>
+          
           <div class="row">
             <!-- Workstation Product Card 1 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/ws/1.png" alt="Workstation Pro X">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Xeon Budget</h5>
-                    <p class="product-price">Start at 15jt</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> Intel Xeon Haswell 36C/72T+
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 128GB+ DDR4 ECC RAM
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 3 GPU Pcie 3.0 
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Xeon Budget')">
+                <img src="img/ws/1.png" alt="Xeon Budget Workstation" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Xeon Budget</span>
+                    <span class="en-content">Xeon Budget</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Mulai dari 15jt</span>
+                    <span class="en-content">Starting at 15M IDR</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Intel Xeon Haswell 36C/72T+</span>
+                      <span class="en-content">Intel Xeon Haswell 36C/72T+</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">128GB+ DDR4 ECC RAM</span>
+                      <span class="en-content">128GB+ DDR4 ECC RAM</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">3 GPU PCIe 3.0</span>
+                      <span class="en-content">3 GPU PCIe 3.0</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+            
             <!-- Workstation Product Card 2 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/ws/2.png" alt="Workstation Ultra">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Xeon Scalable</h5>
-                    <p class="product-price">Start at 30jt</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> Intel Xeon Scalable 56C/112T+
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 512GB+ DDR4 ECC RAM
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 3 GPU PCIE 3.0 
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Xeon Scalable')">
+                <img src="img/ws/2.png" alt="Xeon Scalable Workstation" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Xeon Scalable</span>
+                    <span class="en-content">Xeon Scalable</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Mulai dari 30jt</span>
+                    <span class="en-content">Starting at 30M IDR</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Intel Xeon Scalable 56C/112T+</span>
+                      <span class="en-content">Intel Xeon Scalable 56C/112T+</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">512GB+ DDR4 ECC RAM</span>
+                      <span class="en-content">512GB+ DDR4 ECC RAM</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">3 GPU PCIe 3.0</span>
+                      <span class="en-content">3 GPU PCIe 3.0</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+            
             <!-- Workstation Product Card 3 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/ws/3.png" alt="Workstation Ultra">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Mini Data Center</h5>
-                    <p class="product-price">Start at 70jt</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> AMD Epyc Rome/Milan 128C/256T+                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 1TB+ DDR4 ECC RAM
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 4 GPU PCIE 4.0
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Mini Data Center')">
+                <img src="img/ws/3.png" alt="Mini Data Center" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Mini Data Center</span>
+                    <span class="en-content">Mini Data Center</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Mulai dari 70jt</span>
+                    <span class="en-content">Starting at 70M IDR</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">AMD Epyc Rome/Milan 128C/256T+</span>
+                      <span class="en-content">AMD Epyc Rome/Milan 128C/256T+</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">1TB+ DDR4 ECC RAM</span>
+                      <span class="en-content">1TB+ DDR4 ECC RAM</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">4 GPU PCIe 4.0</span>
+                      <span class="en-content">4 GPU PCIe 4.0</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+            
             <!-- Workstation Product Card 4 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/ws/4.png" alt="Workstation Ultra">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Custom</h5>
-                    <p class="product-price">Contact</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> Epyc Genoa/TR Zen4 192C/384T+
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 1TB+ DDR5 ECC RAM
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 4+ GPU PCIE 5.0
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Custom Workstation')">
+                <img src="img/ws/4.png" alt="Custom Workstation" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Custom</span>
+                    <span class="en-content">Custom</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Hubungi Kami</span>
+                    <span class="en-content">Contact Us</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Epyc Genoa/TR Zen4 192C/384T+</span>
+                      <span class="en-content">Epyc Genoa/TR Zen4 192C/384T+</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">1TB+ DDR5 ECC RAM</span>
+                      <span class="en-content">1TB+ DDR5 ECC RAM</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">4+ GPU PCIe 5.0</span>
+                      <span class="en-content">4+ GPU PCIe 5.0</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-            <!-- Additional Workstation Cards can be added here -->
           </div>
+          
           <!-- NAS Solutions -->
-          <h3 class="mt-5 mb-4">NAS Solutions</h3>
+          <h3 class="product-category mt-5">
+            <span class="id-content">Solusi NAS</span>
+            <span class="en-content">NAS Solutions</span>
+          </h3>
+          
           <div class="row">
             <!-- NAS Product Card 1 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/nas/1.png" alt="NAS Pro">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Budget 2-Bay</h5>
-                    <p class="product-price">Start at 2jt</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> Celeron CPU
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 2-Bay up to 24TB
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 1GbE Connectivity
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> Data & Media Storage
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Budget 2-Bay')">
+                <img src="img/nas/1.png" alt="Budget 2-Bay NAS" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Budget 2-Bay</span>
+                    <span class="en-content">Budget 2-Bay</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Mulai dari 2jt</span>
+                    <span class="en-content">Starting at 2M IDR</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Celeron CPU</span>
+                      <span class="en-content">Celeron CPU</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">2-Bay hingga 24TB</span>
+                      <span class="en-content">2-Bay up to 24TB</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Konektivitas 1GbE</span>
+                      <span class="en-content">1GbE Connectivity</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Penyimpanan Data & Media</span>
+                      <span class="en-content">Data & Media Storage</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+            
             <!-- NAS Product Card 2 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/nas/2.png" alt="NAS Ultra">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Premium 4-Bay</h5>
-                    <p class="product-price">start at 8jt</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> Intel N100 / Ryzen 5825u
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 4-Bay up to 88TB
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 2.5GbE Connectivity
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> VM, Container, Media Stream Support
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Premium 4-Bay')">
+                <img src="img/nas/2.png" alt="Premium 4-Bay NAS" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Premium 4-Bay</span>
+                    <span class="en-content">Premium 4-Bay</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Mulai dari 8jt</span>
+                    <span class="en-content">Starting at 8M IDR</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Intel N100 / Ryzen 5825u</span>
+                      <span class="en-content">Intel N100 / Ryzen 5825u</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">4-Bay hingga 88TB</span>
+                      <span class="en-content">4-Bay up to 88TB</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Konektivitas 2.5GbE</span>
+                      <span class="en-content">2.5GbE Connectivity</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Dukungan VM, Container, Media Stream</span>
+                      <span class="en-content">VM, Container, Media Stream Support</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+            
             <!-- NAS Product Card 3 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/nas/4.png" alt="NAS Ultra">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Mini Server</h5>
-                    <p class="product-price">Start at 12jt</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> Intel i9-13900HX/Custom CPU
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 6-Bay up to 144TB
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 2.5GbE+ Connectivity / Custom NIC
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> Transcoding, VM, Container Support
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Mini Server')">
+                <img src="img/nas/4.png" alt="Mini Server NAS" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Mini Server</span>
+                    <span class="en-content">Mini Server</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Mulai dari 12jt</span>
+                    <span class="en-content">Starting at 12M IDR</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Intel i9-13900HX/Custom CPU</span>
+                      <span class="en-content">Intel i9-13900HX/Custom CPU</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">6-Bay hingga 144TB</span>
+                      <span class="en-content">6-Bay up to 144TB</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Konektivitas 2.5GbE+ / Custom NIC</span>
+                      <span class="en-content">2.5GbE+ Connectivity / Custom NIC</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Dukungan Transcoding, VM, Container</span>
+                      <span class="en-content">Transcoding, VM, Container Support</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
+            
             <!-- NAS Product Card 4 -->
-            <div class="col-md-3 mb-4">
-              <div class="product-card">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <img src="img/nas/5.png" alt="NAS Ultra">
-                  </div>
-                  <div class="col-12 p-3">
-                    <h5>Custom</h5>
-                    <p class="product-price">Contact</p>
-                    <ul class="list-unstyled">
-                      <li>
-                        <i class="fas fa-check text-success"></i> Custom Desktop/Server CPU
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 8-Bay+ 500TB+
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> 10GbE+ / Custom NIC
-                      </li>
-                      <li>
-                        <i class="fas fa-check text-success"></i> Transcoding, VM, Container Support
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="product-card" onclick="trackEvent('Products', 'Card Click', 'Custom NAS')">
+                <img src="img/nas/5.png" alt="Custom NAS Solution" class="product-image" loading="lazy">
+                <div class="product-content">
+                  <h4 class="product-title">
+                    <span class="id-content">Custom</span>
+                    <span class="en-content">Custom</span>
+                  </h4>
+                  <p class="product-price">
+                    <span class="id-content">Hubungi Kami</span>
+                    <span class="en-content">Contact Us</span>
+                  </p>
+                  <ul class="product-features">
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Custom Desktop/Server CPU</span>
+                      <span class="en-content">Custom Desktop/Server CPU</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">8-Bay+ 500TB+</span>
+                      <span class="en-content">8-Bay+ 500TB+</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">10GbE+ / Custom NIC</span>
+                      <span class="en-content">10GbE+ / Custom NIC</span>
+                    </li>
+                    <li>
+                      <i class="fas fa-check"></i>
+                      <span class="id-content">Dukungan Transcoding, VM, Container</span>
+                      <span class="en-content">Transcoding, VM, Container Support</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-            <!-- Additional NAS Cards can be added here -->
           </div>
         </div>
       </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials">
+        <div class="container">
+          <h2 class="section-title">
+            <span class="id-content">Apa Kata Klien Kami</span>
+            <span class="en-content">What Our Clients Say</span>
+          </h2>
+          
+          <div class="row">
+            <div class="col-md-4 mb-4">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <p class="testimonial-text">
+                    <span class="id-content">"Server HPC dari Tulus Computing Solutions telah meningkatkan kecepatan simulasi FEA kami hingga 5x lipat. Dukungan teknis mereka luar biasa!"</span>
+                    <span class="en-content">"The HPC server from Tulus Computing Solutions has increased our FEA simulation speed by up to 5x. Their technical support is outstanding!"</span>
+                  </p>
+                  <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmad Fauzi" class="testimonial-avatar" loading="lazy">
+                    <div class="testimonial-info">
+                      <h5>Ahmad Fauzi</h5>
+                      <p>
+                        <span class="id-content">PT Rekayasa Engineering</span>
+                        <span class="en-content">PT Rekayasa Engineering</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <p class="testimonial-text">
+                    <span class="id-content">"Solusi NAS yang mereka berikan sangat membantu studio kami dalam mengelola aset dan file proyek. Harga terjangkau dengan performa luar biasa."</span>
+                    <span class="en-content">"The NAS solution they provided has greatly helped our studio in managing assets and project files. Affordable price with outstanding performance."</span>
+                  </p>
+                  <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Siti Nurhaliza" class="testimonial-avatar" loading="lazy">
+                    <div class="testimonial-info">
+                      <h5>Siti Nurhaliza</h5>
+                      <p>
+                        <span class="id-content">Kreasi Animasi Studio</span>
+                        <span class="en-content">Kreasi Animasi Studio</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <p class="testimonial-text">
+                    <span class="id-content">"Workstation yang dibangun oleh TCS memungkinkan tim kami menjalankan model AI dan machine learning dengan lancar. Konsultasi mereka sangat membantu dalam memilih spesifikasi yang tepat."</span>
+                    <span class="en-content">"The workstation built by TCS allows our team to run AI and machine learning models smoothly. Their consultation was very helpful in choosing the right specifications."</span>
+                  </p>
+                  <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Budi Santoso" class="testimonial-avatar" loading="lazy">
+                    <div class="testimonial-info">
+                      <h5>Budi Santoso</h5>
+                      <p>
+                        <span class="id-content">Startup AI Indonesia</span>
+                        <span class="en-content">Startup AI Indonesia</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Contact Section -->
-      <section id="contact" class="contact-section">
+      <section id="contact">
         <div class="container text-center">
-          <h2>Konsultasi Gratis!</h2>
-          <p class="lead">Hubungi kami melalui Whatsapp untuk konsultasi gratis.</p>
+          <h2 class="contact-title">
+            <span class="id-content">Konsultasi Gratis!</span>
+            <span class="en-content">Free Consultation!</span>
+          </h2>
+          <p class="contact-description lead">
+            <span class="id-content">Hubungi kami melalui WhatsApp untuk konsultasi gratis tentang kebutuhan server Anda. Tim ahli kami siap membantu Anda menemukan solusi terbaik.</span>
+            <span class="en-content">Contact us via WhatsApp for a free consultation about your server needs. Our expert team is ready to help you find the best solution.</span>
+          </p>
           <div class="mt-4">
-            <a href="https://wa.me/6287742253065?text=Halo%20Tulus%20Computing%20Solutions%2C%20saya%20tertarik%20untuk%20build%20server.%20Bisa%20konsultasi%20untuk%20kebutuhan%20saya%3F" class="btn btn-success btn-lg mr-2" target="_blank">
-              <i class="fab fa-whatsapp"></i> Whatsapp
+            <a href="https://wa.me/6287742253065?text=Halo%20Tulus%20Computing%20Solutions%2C%20saya%20tertarik%20untuk%20build%20server.%20Bisa%20konsultasi%20untuk%20kebutuhan%20saya%3F" class="btn btn-success btn-lg contact-btn" target="_blank" onclick="trackEvent('Contact', 'WhatsApp Click', 'Contact Section'); trackPixelEvent('WhatsAppContact', {position: 'contact_section'});">
+              <i class="fab fa-whatsapp mr-2"></i>
+              <span class="id-content">Hubungi via WhatsApp</span>
+              <span class="en-content">Contact via WhatsApp</span>
             </a>
           </div>
         </div>
       </section>
     </main>
+
     <!-- Footer -->
     <footer>
-      <div class="container d-flex justify-content-between align-items-center">
-        <img src="img/tcs-mini.png" alt="Company Logo" class="footer-logo">
-        <p class="mb-0">&copy; 2025 Tulus Comp. All rights reserved.</p>
+      <div class="container">
+        <div class="footer-content">
+          <img src="img/tcs-mini.png" alt="Tulus Computing Solutions Logo" class="footer-logo" loading="lazy">
+          <div class="footer-links">
+            <a href="#hero">
+              <span class="id-content">Beranda</span>
+              <span class="en-content">Home</span>
+            </a>
+            <a href="#solutions">
+              <span class="id-content">Solusi</span>
+              <span class="en-content">Solutions</span>
+            </a>
+            <a href="#about">
+              <span class="id-content">Tentang Kami</span>
+              <span class="en-content">About Us</span>
+            </a>
+            <a href="#products">
+              <span class="id-content">Produk</span>
+              <span class="en-content">Products</span>
+            </a>
+            <a href="#contact">
+              <span class="id-content">Kontak</span>
+              <span class="en-content">Contact</span>
+            </a>
+          </div>
+          <p class="footer-copyright">&copy; 2025 Tulus Computing Solutions. All rights reserved.</p>
+        </div>
       </div>
     </footer>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+      function switchLanguage(lang) {
+        document.documentElement.lang = lang;
+        
+        // Update active state on buttons
+        if (lang === 'id') {
+          document.getElementById('id-lang').classList.add('active');
+          document.getElementById('en-lang').classList.remove('active');
+        } else {
+          document.getElementById('id-lang').classList.remove('active');
+          document.getElementById('en-lang').classList.add('active');
+        }
+        
+        // Store language preference
+        localStorage.setItem('preferredLanguage', lang);
+      }
+      
+      // Check for stored language preference
+      document.addEventListener('DOMContentLoaded', function() {
+        const storedLang = localStorage.getItem('preferredLanguage');
+        if (storedLang && (storedLang === 'en')) {
+          switchLanguage(storedLang);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+      });
+    </script>
+    
+    <!-- Enhanced Analytics Tracking -->
+    <script>
+      // Track scroll depth
+      let scrollDepthMarkers = [25, 50, 75, 100];
+      let scrollDepthTracked = [];
+      
+      window.addEventListener('scroll', function() {
+        const scrollPercent = Math.round((window.scrollY / (document.body.offsetHeight - window.innerHeight)) * 100);
+        
+        scrollDepthMarkers.forEach(function(marker) {
+          if (scrollPercent >= marker && !scrollDepthTracked.includes(marker)) {
+            scrollDepthTracked.push(marker);
+            trackEvent('Scroll Depth', 'Scroll', marker + '%');
+          }
+        });
+      });
+      
+      // Track time spent on page
+      let timeOnPageIntervals = [30, 60, 120, 300]; // seconds
+      let timeOnPageTracked = [];
+      let startTime = new Date().getTime();
+      
+      setInterval(function() {
+        const timeSpent = Math.floor((new Date().getTime() - startTime) / 1000);
+        
+        timeOnPageIntervals.forEach(function(interval) {
+          if (timeSpent >= interval && !timeOnPageTracked.includes(interval)) {
+            timeOnPageTracked.push(interval);
+            trackEvent('Time on Page', 'Duration', interval + ' seconds');
+          }
+        });
+      }, 1000);
+      
+      // Track outbound links
+      document.addEventListener('click', function(e) {
+        const target = e.target.closest('a');
+        if (target && target.hostname !== window.location.hostname) {
+          trackEvent('Outbound Link', 'Click', target.href);
+        }
+      });
+    </script>
   </body>
 </html>
