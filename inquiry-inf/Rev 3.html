@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Optimized RAG/Indexing Pipeline — Proposal & Parts Picker</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --emph: #1e222b;
+      --text: #e8eef5;
+      --muted: #aeb8c4;
+      --accent: #5cc8ff;
+      --accent-2: #8bde64;
+      --danger: #ff6b6b;
+      --warn: #ffd166;
+      --ok: #2ecc71;
+      --line: #232a33;
+    }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font: 15.5px/1.55 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 18px 120px; }
+    header.hero {
+      background: linear-gradient(180deg, rgba(92,200,255,0.08), transparent 60%), var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { margin: 10px 0 6px; line-height: 1.25; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 21px; margin-top: 18px; }
+    h3 { font-size: 18px; margin-top: 14px; color: #dce7f3; }
+    p { margin: 6px 0 10px; color: var(--text); }
+    .muted { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 920px) {
+      .grid-2 { grid-template-columns: 1.1fr 0.9fr; }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .section-title {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; margin-bottom: 6px;
+    }
+    .kvs { display: grid; grid-template-columns: 170px 1fr; gap: 6px 12px; }
+    .kv-key { color: var(--muted); }
+    .kv-val { color: var(--text); }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line);
+      background: var(--emph); color: var(--text); font-size: 12px; margin-right: 6px;
+    }
+    .ok { color: var(--accent-2); }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0 8px;
+      font-size: 14px;
+    }
+    .table th, .table td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 10px;
+      vertical-align: top;
+    }
+    .table th { text-align: left; color: var(--muted); font-weight: 600; }
+    .table tfoot td {
+      border-top: 1px solid var(--line);
+      font-weight: 700;
+    }
+    .small { font-size: 12.5px; color: var(--muted); }
+    .note { background: #12161d; border-left: 3px solid var(--accent); padding: 8px 10px; border-radius: 6px; }
+    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    button, .btn {
+      cursor: pointer;
+      background: var(--emph);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 600;
+    }
+    button.accent, .btn.accent { background: #1d2937; border-color: #2a3646; }
+    button.primary, .btn.primary { background: #0e7dd8; border-color: #0f75c7; }
+    button.ghost, .btn.ghost { background: transparent; }
+    button.warn { background: #2a1f00; border-color: #3a2d03; color: #ffd166; }
+    .flex { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .picker-type {
+      border: 1px dashed #2a3140;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 8px 0;
+      background: #12161d;
+    }
+    .picker-type h4 { margin: 0 0 6px; font-size: 15px; color: #dce7f3; }
+    .picker-row {
+      display: grid; grid-template-columns: 1.2fr 0.45fr 0.55fr auto;
+      gap: 8px; align-items: center; margin: 6px 0;
+    }
+    .picker-row select, .picker-row input {
+      width: 100%; background: var(--panel); color: var(--text);
+      border: 1px solid var(--line); border-radius: 8px; padding: 7px 8px;
+    }
+    .picker-row .row-sub { color: var(--muted); font-size: 13px; }
+    .picker-row .rmv { color: var(--danger); background: #2a1515; border-color: #3a2121; }
+    .summary {
+      position: sticky; bottom: 12px; background: rgba(18,22,29,0.95);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-top: 10px;
+    }
+    .summary .total { font-size: 18px; font-weight: 800; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 999px;
+      border: 1px solid var(--line); background: #10151d; font-size: 12px;
+    }
+    .hr { height: 1px; background: var(--line); margin: 12px 0; }
+    code.inline {
+      background: #11151c; border: 1px solid #222a36; padding: 2px 6px; border-radius: 6px; font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Thank you for your inquiry</h1>
+      <p>We’ve reviewed your requirements and prepared an optimized build and end‑to‑end pipeline for high‑throughput document ingestion, embedding, and retrieval—balanced for performance, stability, and total cost of ownership.</p>
+      <div class="flex">
+        <span class="pill">Target workload: parsing + embeddings + hybrid retrieval</span>
+        <span class="pill">Latency budget: ANN P95 20–120 ms, end‑to‑end 300–900 ms</span>
+        <span class="pill">Storage tiers: NVMe hot + HDD cold</span>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>Optimized pipeline overview (expected, adaptable)</h2>
+        <span class="small">Mapped to recommended hardware below</span>
+      </div>
+
+      <h3>Hardware recap and storage layout</h3>
+      <div class="kvs small">
+        <div class="kv-key">CPU/RAM/GPUs</div><div class="kv-val">1× AMD EPYC 7702 (64c/128t), 256 GB RAM (optionally 512 GB), 4× RTX 3090</div>
+        <div class="kv-key">Storage tiers</div><div class="kv-val">OS/apps: 2 TB NVMe; scratch/special: 2 × 4 TB NVMe (RAID0 or ZFS special vdevs); cold: 4 × 18 TB HDD (RAIDZ1 or RAID10). Keep WAL/snapshots on NVMe; migrate cold segments post‑build.</div>
+      </div>
+
+      <h3>1) Ingestion and normalization</h3>
+      <p>File discovery, dedupe (URL/hash), metadata extraction, MIME classification, and quarantining corrupted files. Stream from HDD, stage small batches on NVMe. Maintain a durable manifest with <span class="mono">doc_id</span>, source, timestamps, checksum, and parse status for exact resumption.</p>
+      <div class="kvs small">
+        <div class="kv-key">CPU/RAM</div><div class="kv-val">8–12 threads; 16–24 GB RAM</div>
+        <div class="kv-key">I/O</div><div class="kv-val">HDD stream; NVMe staging</div>
+      </div>
+
+      <h3>2) Parsing and chunking (major CPU stage)</h3>
+      <p>PDF→text (with OCR fallback for scans); layout‑aware segmentation; language/id detection; boilerplate removal; chunking with overlap; optional table/figure extraction. Adaptive by section headers; dedupe near‑duplicate chunks using MinHash/SBERT.</p>
+      <div class="kvs small">
+        <div class="kv-key">CPU</div><div class="kv-val">~60 parsing workers (reserve ~4 cores for OS/I/O); NUMA‑aware pinning</div>
+        <div class="kv-key">RAM @256 GB</div><div class="kv-val">160–192 GB for parse buffers + OS cache (~4–8 GB/worker worst‑case)</div>
+        <div class="kv-key">RAM @512 GB</div><div class="kv-val">220–256 GB for fewer I/O stalls and re‑reads</div>
+        <div class="kv-key">Throughput</div><div class="kv-val">50–90 PDFs/sec depending on corpus quality; auto‑retries for heavy/scanned docs</div>
+        <div class="kv-key">Chunking</div><div class="kv-val">800–1200 tokens with 100–150 overlap; dedupe sim ≥ 0.97 (cosine)</div>
+        <div class="kv-key">Outputs</div><div class="kv-val">Clean text + spans (page/section/title), metadata JSONL, chunk records with <span class="mono">doc_id</span>, <span class="mono">chunk_id</span>, token_count</div>
+      </div>
+
+      <h3>3) Embedding generation (max GPU during build)</h3>
+      <p>Batch embed chunks with FP16 and pinned memory. Use 4×3090 during build; in serving, reserve 1 GPU for reranking. Maintain large host queues to keep GPUs ≥95% utilized.</p>
+      <div class="kvs small">
+        <div class="kv-key">Models</div><div class="kv-val">768–1024d doc encoders (e.g., E5-large-v2/3, bge-large); smaller encoder for titles/metadata optional</div>
+        <div class="kv-key">Batching</div><div class="kv-val">~2–4k tokens/GPU·step or ~128–256 chunks/GPU·step (context/model dependent)</div>
+        <div class="kv-key">RAM @256 GB</div><div class="kv-val">64–96 GB pre‑token cache + 64–96 GB staging queues</div>
+        <div class="kv-key">RAM @512 GB</div><div class="kv-val">Grow caches/queues ~50% for +5–10% throughput</div>
+        <div class="kv-key">Throughput</div><div class="kv-val">~200–400k chunks/hour across 4 GPUs</div>
+        <div class="kv-key">Output</div><div class="kv-val">Per‑shard parquet/NPY vectors with aligned IDs and mapping to doc/chunk IDs</div>
+      </div>
+
+      <h3>4) Vector indexing (ANN) and tiering</h3>
+      <p>Qdrant or Milvus with HNSW and optional PQ/IVF. Fit hot set in RAM; cold set mmap‑backed on NVMe/HDD. Build on NVMe, then tier colder segments to HDD. Keep hottest collections and WAL on NVMe; snapshot after merges.</p>
+      <div class="kvs small">
+        <div class="kv-key">Build @256 GB</div><div class="kv-val">ef_construct 200–300; M 32–48; PQ‑8 or IVF‑PQ for cold; shard by collection/time/source</div>
+        <div class="kv-key">Build @512 GB</div><div class="kv-val">Raise ef_construct and/or PQ‑16 for better recall/latency</div>
+        <div class="kv-key">RAM @256 GB</div><div class="kv-val">160–200 GB for vector engine + OS page cache</div>
+        <div class="kv-key">RAM @512 GB</div><div class="kv-val">280–320 GB for HNSW/mmap cache; 20–40% faster builds</div>
+      </div>
+
+      <h3>5) Keyword/metadata indexing</h3>
+      <p>OpenSearch (BM25 + filters). Bulk‑friendly build: <span class="mono">refresh_interval=-1</span>, replicas 0, high bulk threads; then <span class="mono">force_merge</span>, restore refresh and replicas.</p>
+      <div class="kvs small">
+        <div class="kv-key">Heap</div><div class="kv-val">32–48 GB on 256 GB nodes (prefer OS cache); 64–96 GB on 512 GB nodes</div>
+        <div class="kv-key">Fields/Filters</div><div class="kv-val"><span class="mono">doc_id</span>, source, timestamps, authors, section headers, titles; filter by time/source/type</div>
+      </div>
+
+      <h3>6) Retrieval, ranking, and serving</h3>
+      <p>Hybrid retrieval: BM25/filters ∪ ANN → reranker → optional lightweight synthesis. Cache hottest vectors in RAM, batch reranks to keep GPU busy, and stream responses when possible.</p>
+      <div class="kvs small">
+        <div class="kv-key">ANN</div><div class="kv-val">ef_search 100–400 (adaptive to latency budget); return top 200 to reranker</div>
+        <div class="kv-key">Reranker</div><div class="kv-val">1×3090 (serving) with bge‑reranker/monoT5 over top 50–200; mixed precision if supported; target <50 ms/batch</div>
+        <div class="kv-key">Latency @256 GB</div><div class="kv-val">ANN P95 20–60 ms (hot), 60–120 ms (cold); rerank P95 40–80 ms/batch; end‑to‑end 300–900 ms</div>
+        <div class="kv-key">Latency @512 GB</div><div class="kv-val">20–50% lower ANN tails; more stable QPS</div>
+      </div>
+
+      <h3>7) Orchestration, resilience, and monitoring</h3>
+      <p>Run “build” vs “serve” modes to dedicate resources appropriately. Apply backpressure between stages, retry heavy PDFs with async OCR, snapshot nightly (vector + OpenSearch) to HDD, and test restores quarterly.</p>
+      <div class="kvs small">
+        <div class="kv-key">Monitoring</div><div class="kv-val">GPU (util/mem), vector DB (cache/page faults/QPS/latency), OpenSearch (heap/GC/segments), OS (page cache ratio/IO wait). Alert on tail latencies, cache thrash, WAL growth.</div>
+        <div class="kv-key">System tuning</div><div class="kv-val">Disable THP, use jemalloc for Python, raise <span class="mono">vm.max_map_count</span>, NUMA pinning, consider ZFS ARC cap 64–128 GB on 512 GB systems.</div>
+      </div>
+
+      <h3>Concrete defaults</h3>
+      <p class="small">
+        Chunk size 800–1200, overlap 100–150; local dedupe cosine ≥0.97. HNSW build M=32–48, ef_construct=200–300; PQ‑8 (PQ‑16 w/ 512 GB). ANN ef_search=200 default (dynamic per latency). Reranker over top 50–200 @ ~90–95% GPU utilization. OpenSearch: shards sized to node (≈6–12), refresh_interval 30–60 s in prod, index templates for field types, keyword fields for exact filters.
+      </p>
+
+      <div class="note small">
+        Expected outcomes: build accelerated by NVMe + RAM cache; with 512 GB, 20–40% faster index builds and fewer spills. Serving stabilizes hybrid retrieval tails; reranker quality lifts reduce hallucination and improve relevance.
+      </div>
+    </section>
+
+    <section class="grid grid-2">
+      <div class="card">
+        <div class="section-title">
+          <h2>Handpicked parts (curated for performance/TCOP)</h2>
+          <span class="small">Filtered from 100+ options for best fit and value</span>
+        </div>
+        <p>We evaluated motherboards, CPUs, GPUs, memory kits, power delivery, thermals, storage tiers, and UPS to support the pipeline’s build/serve modes, prioritizing stability, throughput, and availability of spares. The list below powers the recommended build and fuels the customizable picker.</p>
+      </div>
+
+      <div class="card">
+        <div class="section-title">
+          <h2>Recommended set (best value)</h2>
+          <span class="tag">Quote</span>
+        </div>
+        <table class="table">
+          <thead>
+            <tr><th>Part</th><th>Model</th><th class="mono">Q</th><th class="mono">Price</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mobo</td><td>Huananzhi H12D</td><td class="mono">1</td><td class="mono">Rp8.950.000</td></tr>
+            <tr><td>CPU</td><td>EPYC 7702</td><td class="mono">1</td><td class="mono">Rp8.510.063</td></tr>
+            <tr><td>HSF</td><td>ARCTIC FREEZER 4U‑M</td><td class="mono">1</td><td class="mono">Rp850.000</td></tr>
+            <tr><td>RAM</td><td>8× 3200AA ECC 32 GB</td><td class="mono">1</td><td class="mono">Rp7.840.000</td></tr>
+            <tr><td>NVMe (OS)</td><td>WD Black SN850X 2 TB</td><td class="mono">1</td><td class="mono">Rp2.500.000</td></tr>
+            <tr><td>NVMe (Hot)</td><td>Samsung 990 Pro 4 TB</td><td class="mono">2</td><td class="mono">Rp9.780.000</td></tr>
+            <tr><td>HDD (Cold)</td><td>Seagate EXOS X18 18 TB (second)</td><td class="mono">4</td><td class="mono">Rp20.400.000</td></tr>
+            <tr><td>GPU</td><td>4× RTX 3090</td><td class="mono">1</td><td class="mono">Rp45.000.000</td></tr>
+            <tr><td>PSU</td><td>2× Super Flower LEADEX III 1300W Gold</td><td class="mono">1</td><td class="mono">Rp5.000.000</td></tr>
+            <tr><td>Case</td><td>Open Rack (custom)</td><td class="mono">1</td><td class="mono">Rp2.500.000</td></tr>
+            <tr><td>Riser</td><td>4× PCIe 4.0 Riser</td><td class="mono">1</td><td class="mono">Rp1.600.000</td></tr>
+            <tr><td>UPS</td><td>APC SRV3KI‑E 2700W (new)</td><td class="mono">1</td><td class="mono">Rp12.400.000</td></tr>
+            <tr><td>Services</td><td>Standard — Hardware Optimized</td><td class="mono">1</td><td class="mono">Rp15.000.000</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="3" class="mono">Total</td><td class="mono">Rp140.330.063</td></tr>
+          </tfoot>
+        </table>
+        <div class="btn-row">
+          <button class="primary" id="btn-load-recommended">Load this into the picker</button>
+          <span class="small muted">Tip: you can still tweak quantities/models afterward.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="picker">
+      <div class="section-title">
+        <h2>Customize your build (handpicked parts)</h2>
+        <span class="small">Real‑time price summary + exportable text</span>
+      </div>
+      <p class="muted">Choose components from our curated catalog below. Add multiple items per category (e.g., OS NVMe + Hot NVMe, multiple HDDs). Totals update in real time. When ready, export to a simple text quote you can send back.</p>
+
+      <div id="picker-types"></div>
+
+      <div class="summary">
+        <div class="flex" style="justify-content: space-between;">
+          <div>
+            <div class="small muted">Selected items</div>
+            <div id="selected-count" class="mono">0 lines</div>
+          </div>
+          <div>
+            <div class="small muted">Grand total</div>
+            <div id="grand-total" class="total mono">Rp0</div>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top: 8px;">
+          <button id="btn-export" class="accent">Export selection as text</button>
+          <button id="btn-copy" class="ghost">Copy to clipboard</button>
+          <button id="btn-reset" class="warn">Reset picker</button>
+        </div>
+        <div id="export-preview" class="small muted" style="margin-top:6px; white-space: pre-wrap;"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>Notes and assumptions</h2>
+      </div>
+      <ul class="small" style="margin: 0 0 0 18px;">
+        <li>Prices are indicative and may vary with stock; second‑hand items (e.g., EXOS X18) include basic health checks and limited warranty.</li>
+        <li>Quote excludes shipping/taxes unless stated otherwise. Build/commissioning covered by the chosen service tier; OS install, firmware updates, stress tests, and burn‑in are included.</li>
+        <li>Storage: we can provision ZFS with ARC cap and special vdevs for small‑file/metadata acceleration, and set up nightly snapshots/replication as requested.</li>
+        <li>Software stack examples: Qdrant/Milvus for vectors; OpenSearch for keyword/filters; e5/bge encoders for embeddings; bge‑reranker/monoT5 for rerank.</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- Embedded, sanitized handpicked parts from your XLSX (curated) -->
+  <script id="parts-data" type="application/json">
+  {
+    "part_types": ["CPU","Case","GPU","HDD","HSF","Motherboard","NVME SSD","PCIE Riser","PSU","RAM","Service","UPS"],
+    "records": [
+      {"No":1,"Parts Type":"Motherboard","Model":"H12SSL-i","Specs":"5 × PCIe 4.0 x16, 2 × PCIe 4.0 x8","Specs.1":"305 × 244 (ATX)","Specs.2":"2 × M.2 PCIe 4.0 x4","Specs.3":"8 × SATA3, 1 × SlimSAS x8 (2 NVMe or 8 SATA)","Specs.4":"Single Socket CPU","Sell Price":14596875},
+      {"No":2,"Parts Type":"Motherboard","Model":"Huananzhi H12D","Specs":"4 × PCIe 3.0/4.0 x16","Specs.1":"305 × 245 (ATX)","Specs.2":"3 × M.2 PCIe 3.0/4.0 x4","Specs.3":"4 × SATA3, 3 × SFF-8643 (12 SATA or 3 U.2 PCIe 3.0/4.0 x4)","Specs.4":"Single Socket CPU","Sell Price":8950000},
+      {"No":3,"Parts Type":"Motherboard","Model":"MZ32-AR0 (new)","Specs":"5 × PCIe Gen4 (x16/x8), 2 × PCIe Gen3 (x16/x8)","Specs.1":"305 × 330 (E-ATX)","Specs.2":"2 × M.2 PCIe Gen3 x4","Specs.3":"4 × SlimSAS (Gen4 NVMe), 2 × SlimSAS (8 × SATA), 8 × SATA total","Specs.4":"Single Socket CPU","Sell Price":10268438},
+      {"No":6,"Parts Type":"Motherboard","Model":"H12SSL-NT","Specs":"5 × PCIe 4.0 x16, 2 × PCIe 4.0 x8","Specs.1":"305 × 244 (ATX)","Specs.2":"2 × M.2 PCIe 4.0 x4","Specs.3":"2 × SlimSAS x8 (each: 8 SATA3 or 2 NVMe), Dual 10GBase-T","Specs.4":"Single Socket CPU","Sell Price":14917500},
+      {"No":8,"Parts Type":"NVME SSD","Model":"Samsung 990 Pro 2TB","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":2845000},
+      {"No":9,"Parts Type":"NVME SSD","Model":"WD Black SN850X 2TB","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":2500000},
+      {"No":10,"Parts Type":"NVME SSD","Model":"Samsung 990 Pro 4TB","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":4890000},
+      {"No":11,"Parts Type":"HSF","Model":"ARCTIC FREEZER 4U-M","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":850000},
+      {"No":12,"Parts Type":"CPU","Model":7702,"Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":8510062},
+      {"No":20,"Parts Type":"CPU","Model":"7B13","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":12133125},
+      {"No":23,"Parts Type":"CPU","Model":7763,"Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":18866250},
+      {"No":24,"Parts Type":"CPU","Model":"7V13","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":21110625},
+      {"No":25,"Parts Type":"PSU","Model":"2*Super Flower LEADEX III GOLD 1300w Gold","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":5000000},
+      {"No":26,"Parts Type":"RAM","Model":"8*3200AA ECC 32GB","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":7840000},
+      {"No":27,"Parts Type":"RAM","Model":"8*3200AA ECC 64GB","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":12800000},
+      {"No":28,"Parts Type":"Case","Model":"Open Rack (custom)","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":2500000},
+      {"No":29,"Parts Type":"HDD","Model":"Seagate EXOS X18 HDD 18TB (second)","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":5100000},
+      {"No":30,"Parts Type":"HDD","Model":"Seagate EXOS X18 HDD 18TB (new)","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":11738000},
+      {"No":31,"Parts Type":"GPU","Model":"4*RTX 3090","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":45000000},
+      {"No":32,"Parts Type":"PCIE Riser","Model":"4*PCIE 4.0 Riser","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":1600000},
+      {"No":33,"Parts Type":"UPS","Model":"APC SRV3KI-E 2700W (new)","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":12400000},
+      {"No":34,"Parts Type":"UPS","Model":"UPS APC SRT3000XLI (second)","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":9500000},
+      {"No":35,"Parts Type":"Service","Model":"Basic — Build & Commission","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":12500000},
+      {"No":36,"Parts Type":"Service","Model":"Standard — Hardware Optimized","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":15000000},
+      {"No":37,"Parts Type":"Service","Model":"Premium — Enterprise Care","Specs":null,"Specs.1":null,"Specs.2":null,"Specs.3":null,"Specs.4":null,"Sell Price":19500000}
+    ]
+  }
+  </script>
+
+  <script>
+    // Utilities
+    const fmtIDR = (n) => 'Rp' + (n || 0).toLocaleString('id-ID');
+    const dateStr = () => new Date().toLocaleString('id-ID');
+
+    // Load data
+    const RAW = JSON.parse(document.getElementById('parts-data').textContent);
+    const PARTS = RAW.records.map(r => ({
+      type: String(r["Parts Type"] || '').trim(),
+      model: String(r["Model"]),
+      price: Number(r["Sell Price"] || 0),
+      specs: [r["Specs"], r["Specs.1"], r["Specs.2"], r["Specs.3"], r["Specs.4"]].filter(Boolean).join(' • ')
+    })).filter(x => x.type && x.model);
+
+    // Group by type
+    const TYPES_ORDER = [
+      "Motherboard", "CPU", "HSF", "RAM", "GPU", "NVME SSD", "HDD", "PSU", "PCIE Riser", "Case", "UPS", "Service"
+    ];
+    const TYPE_GROUPS = {};
+    PARTS.forEach(p => {
+      TYPE_GROUPS[p.type] = TYPE_GROUPS[p.type] || [];
+      TYPE_GROUPS[p.type].push(p);
+    });
+    Object.keys(TYPE_GROUPS).forEach(t => TYPE_GROUPS[t].sort((a,b) => a.model.localeCompare(b.model)));
+
+    // Picker DOM
+    const pickerRoot = document.getElementById('picker-types');
+    const rows = []; // track dynamic rows for totals/export
+
+    function makeTypeBlock(type) {
+      const block = document.createElement('div');
+      block.className = 'picker-type';
+      block.dataset.type = type;
+
+      const header = document.createElement('div');
+      header.className = 'flex';
+      header.style.justifyContent = 'space-between';
+
+      const h4 = document.createElement('h4');
+      h4.textContent = type;
+      header.appendChild(h4);
+
+      const addBtn = document.createElement('button');
+      addBtn.textContent = `Add ${type}`;
+      addBtn.className = 'btn accent';
+      addBtn.onclick = () => addRow(block, type);
+      header.appendChild(addBtn);
+
+      const rowsWrap = document.createElement('div');
+      rowsWrap.className = 'rows-wrap';
+
+      block.appendChild(header);
+      block.appendChild(rowsWrap);
+      return block;
+    }
+
+    function addRow(block, type, preset = null) {
+      const options = TYPE_GROUPS[type] || [];
+      const rowEl = document.createElement('div');
+      rowEl.className = 'picker-row';
+
+      const sel = document.createElement('select');
+      const opt0 = document.createElement('option');
+      opt0.value = '';
+      opt0.textContent = `Select a ${type}…`;
+      sel.appendChild(opt0);
+      options.forEach(o => {
+        const opt = document.createElement('option');
+        opt.value = o.model;
+        opt.textContent = `${o.model} — ${fmtIDR(o.price)}`;
+        opt.dataset.price = String(o.price);
+        opt.dataset.specs = o.specs || '';
+        sel.appendChild(opt);
+      });
+
+      const qty = document.createElement('input');
+      qty.type = 'number';
+      qty.min = '0';
+      qty.step = '1';
+      qty.value = '0';
+
+      const sub = document.createElement('div');
+      sub.className = 'row-sub mono';
+      sub.textContent = fmtIDR(0);
+
+      const rmv = document.createElement('button');
+      rmv.className = 'rmv';
+      rmv.textContent = '✕';
+      rmv.title = 'Remove this line';
+
+      // Spec line (below, spanning columns)
+      const specLine = document.createElement('div');
+      specLine.className = 'small muted';
+      specLine.style.gridColumn = '1 / -1';
+      specLine.textContent = '';
+
+      function recalc() {
+        const price = Number(sel.selectedOptions[0]?.dataset.price || 0);
+        const override = Number(rowEl.dataset.overridePrice || 0);
+        const usedPrice = override || price;
+        const q = Number(qty.value || 0);
+        sub.textContent = fmtIDR(usedPrice * q);
+        specLine.textContent = sel.value && sel.selectedOptions[0]?.dataset.specs
+          ? 'Specs: ' + sel.selectedOptions[0].dataset.specs
+          : '';
+        grandTotal();
+      }
+
+      sel.addEventListener('change', () => {
+        if (sel.value && qty.value === '0') qty.value = '1';
+        // Clear any price override when selection changes
+        rowEl.dataset.overridePrice = '';
+        recalc();
+      });
+      qty.addEventListener('change', recalc);
+      rmv.addEventListener('click', () => {
+        rowEl.remove();
+        const idx = rows.indexOf(rowEl);
+        if (idx >= 0) rows.splice(idx, 1);
+        grandTotal();
+      });
+
+      // Layout
+      rowEl.appendChild(sel);
+      rowEl.appendChild(qty);
+      rowEl.appendChild(sub);
+      rowEl.appendChild(rmv);
+      rowEl.appendChild(specLine);
+
+      block.querySelector('.rows-wrap').appendChild(rowEl);
+      rows.push(rowEl);
+
+      // Preset
+      if (preset) {
+        // Find exact model text match (case-sensitive as per list)
+        const idx = Array.from(sel.options).findIndex(o => o.value === String(preset.model));
+        if (idx >= 0) {
+          sel.selectedIndex = idx;
+          qty.value = String(preset.qty ?? 1);
+          if (preset.overridePrice != null) {
+            rowEl.dataset.overridePrice = String(preset.overridePrice);
+          }
+        }
+        recalc();
+      }
+    }
+
+    function bootPicker() {
+      // Create blocks for all known types in our preferred order
+      TYPES_ORDER.forEach(type => {
+        if (!TYPE_GROUPS[type]) return;
+        const block = makeTypeBlock(type);
+        pickerRoot.appendChild(block);
+        // Start with one empty row for convenience
+        addRow(block, type);
+      });
+    }
+
+    function currentSelections() {
+      const lines = [];
+      rows.forEach(rowEl => {
+        const type = rowEl.closest('.picker-type')?.dataset.type || '';
+        const sel = rowEl.querySelector('select');
+        const qty = Number(rowEl.querySelector('input').value || 0);
+        if (!sel || !sel.value || qty <= 0) return;
+        const price = Number(sel.selectedOptions[0]?.dataset.price || 0);
+        const override = Number(rowEl.dataset.overridePrice || 0);
+        const used = override || price;
+        lines.push({
+          type,
+          model: sel.value,
+          unit: used,
+          qty,
+          subtotal: used * qty
+        });
+      });
+      return lines;
+    }
+
+    function grandTotal() {
+      const lines = currentSelections();
+      const total = lines.reduce((a, b) => a + b.subtotal, 0);
+      document.getElementById('grand-total').textContent = fmtIDR(total);
+      document.getElementById('selected-count').textContent = `${lines.length} line${lines.length === 1 ? '' : 's'}`;
+      // Live preview (compact)
+      const preview = [
+        `Custom Build — ${dateStr()}`,
+        ''.padEnd(22, '—'),
+        ...lines.map(l => `- ${l.type}: ${l.model} ×${l.qty} @ ${fmtIDR(l.unit)} = ${fmtIDR(l.subtotal)}`),
+        ''.padEnd(22, '—'),
+        `Grand Total: ${fmtIDR(total)}`
+      ].join('\n');
+      document.getElementById('export-preview').textContent = preview;
+      return { lines, total, preview };
+    }
+
+    function exportText(saveToFile = true) {
+      const { preview } = grandTotal();
+      if (!saveToFile) return preview;
+      const blob = new Blob([preview], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `custom_build_${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function copyText() {
+      const { preview } = grandTotal();
+      navigator.clipboard.writeText(preview).then(() => {
+        alert('Selection copied to clipboard.');
+      }).catch(() => {
+        alert('Copy failed. You can select the preview text and copy it manually.');
+      });
+    }
+
+    function resetPicker() {
+      pickerRoot.innerHTML = '';
+      rows.length = 0;
+      bootPicker();
+      grandTotal();
+    }
+
+    // Recommended configuration preset
+    const RECOMMENDED = [
+      { type: "Motherboard", model: "Huananzhi H12D", qty: 1 },
+      { type: "CPU", model: "7702", qty: 1, overridePrice: 8510063 }, // +1 IDR to match quote
+      { type: "HSF", model: "ARCTIC FREEZER 4U-M", qty: 1 },
+      { type: "RAM", model: "8*3200AA ECC 32GB", qty: 1 },
+      { type: "NVME SSD", model: "WD Black SN850X 2TB", qty: 1 },
+      { type: "NVME SSD", model: "Samsung 990 Pro 4TB", qty: 2 },
+      { type: "HDD", model: "Seagate EXOS X18 HDD 18TB (second)", qty: 4 },
+      { type: "GPU", model: "4*RTX 3090", qty: 1 },
+      { type: "PSU", model: "2*Super Flower LEADEX III GOLD 1300w Gold", qty: 1 },
+      { type: "Case", model: "Open Rack (custom)", qty: 1 },
+      { type: "PCIE Riser", model: "4*PCIE 4.0 Riser", qty: 1 },
+      { type: "UPS", model: "APC SRV3KI-E 2700W (new)", qty: 1 },
+      { type: "Service", model: "Standard — Hardware Optimized", qty: 1 }
+    ];
+
+    function loadRecommended() {
+      // Clear everything first
+      pickerRoot.innerHTML = '';
+      rows.length = 0;
+      // Recreate all types
+      TYPES_ORDER.forEach(type => {
+        if (!TYPE_GROUPS[type]) return;
+        const block = makeTypeBlock(type);
+        pickerRoot.appendChild(block);
+      });
+      // Add recommended rows
+      RECOMMENDED.forEach(item => {
+        const block = Array.from(pickerRoot.children).find(b => b.dataset.type === item.type);
+        if (block) addRow(block, item.type, item);
+      });
+      grandTotal();
+    }
+
+    // Bind controls
+    document.getElementById('btn-export').addEventListener('click', () => exportText(true));
+    document.getElementById('btn-copy').addEventListener('click', copyText);
+    document.getElementById('btn-reset').addEventListener('click', resetPicker);
+    document.getElementById('btn-load-recommended').addEventListener('click', loadRecommended);
+
+    // Init
+    bootPicker();
+    grandTotal();
+  </script>
+</body>
+</html>
