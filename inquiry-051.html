@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Setup Offer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+        
+        .thank-you {
+            background: rgba(46, 204, 113, 0.15);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--success);
+        }
+        
+        .thank-you h2 {
+            color: var(--success);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .thank-you p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .tables-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 1200px) {
+            .tables-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .table-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .table-header h2 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th {
+            background: linear-gradient(to bottom, var(--primary), var(--dark));
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(236, 240, 241, 0.5);
+        }
+        
+        tr:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .total-row {
+            background: linear-gradient(to right, rgba(46, 204, 113, 0.2), transparent) !important;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+        
+        .configurator {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .configurator h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .config-group {
+            margin-bottom: 30px;
+        }
+        
+        .config-group h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .select-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        select {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--secondary), #2980b9);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(to right, var(--success), #219653);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .summary {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .summary h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .total-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+        
+        .savings {
+            color: var(--success);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 30px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-server"></i> Server Setup Offer</h1>
+            <p class="subtitle">6 Concurrent Multimedia Users Server</p>
+        </header>
+        
+        <div class="tables-container">
+            <div class="table-section">
+                <div class="table-header">
+                    <h2><i class="fas fa-microchip"></i> Core Build Configuration</h2>
+                </div>
+                <table id="build-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Model</th>
+                            <th>Price (Rp)</th>
+                            <th>Quantity</th>
+                            <th>Total (Rp)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-microchip"></i> Processor</td>
+                            <td>Intel Core i5-12700K</td>
+                            <td class="price">4.090.000</td>
+                            <td>1</td>
+                            <td class="price">4.090.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-border-all"></i> Motherboard</td>
+                            <td>ASUS PRIME Z790M-PLUS-CSM</td>
+                            <td class="price">3.199.000</td>
+                            <td>1</td>
+                            <td class="price">3.199.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-memory"></i> Memory</td>
+                            <td>CORSAIR VENGEANCE DDR5 64GB 5200Mhz</td>
+                            <td class="price">3.099.000</td>
+                            <td>1</td>
+                            <td class="price">3.099.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-hdd"></i> Storage</td>
+                            <td>Adata Legend 900 Pro 1TB NVME</td>
+                            <td class="price">992.750</td>
+                            <td>1</td>
+                            <td class="price">992.750</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-box"></i> Case</td>
+                            <td>Gamemax 4U Server Case</td>
+                            <td class="price">1.030.000</td>
+                            <td>1</td>
+                            <td class="price">1.030.000</td>
+                        </tr>
+                        <tr id="gpu-row">
+                            <td><i class="fas fa-desktop"></i> Graphics Card</td>
+                            <td>RTX 4060 Asus Dual V2</td>
+                            <td class="price">5.500.000</td>
+                            <td>1</td>
+                            <td class="price">5.500.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-fan"></i> Front Fan</td>
+                            <td>Noctua NF-F12 Premium</td>
+                            <td class="price">500.000</td>
+                            <td>1</td>
+                            <td class="price">500.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-fan"></i> Rear Fan</td>
+                            <td>Noctua NF-A6X25 * 2</td>
+                            <td class="price">500.000</td>
+                            <td>1</td>
+                            <td class="price">500.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-plug"></i> Power Supply</td>
+                            <td>Super Flower Leadex III Gold 850W</td>
+                            <td class="price">1.774.000</td>
+                            <td>1</td>
+                            <td class="price">1.774.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-thermometer-half"></i> CPU Cooler</td>
+                            <td>THERMALRIGHT SI-100</td>
+                            <td class="price">679.000</td>
+                            <td>1</td>
+                            <td class="price">679.000</td>
+                        </tr>
+                        <tr id="service-row">
+                            <td><i class="fas fa-cogs"></i> Service</td>
+                            <td>Standard Build + Stress Test + Tuning + 6M Warranty</td>
+                            <td class="price">8.000.000</td>
+                            <td>1</td>
+                            <td class="price">8.000.000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4"><i class="fas fa-calculator"></i> Core Build Subtotal</td>
+                            <td class="price">29.363.750</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-section">
+                <div class="table-header">
+                    <h2><i class="fas fa-plus-circle"></i> Optional Components</h2>
+                </div>
+                <table id="optional-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Model</th>
+                            <th>Price (Rp)</th>
+                            <th>Quantity</th>
+                            <th>Total (Rp)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-battery-full"></i> UPS</td>
+                            <td>SURT1000XLI (Online)</td>
+                            <td class="price">4.000.000</td>
+                            <td>1</td>
+                            <td class="price">4.000.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-tv"></i> KVM Console</td>
+                            <td>IBM 7316-TF3</td>
+                            <td class="price">2.300.000</td>
+                            <td>1</td>
+                            <td class="price">2.300.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-network-wired"></i> KVM Remote</td>
+                            <td>Nano KVM + Memory</td>
+                            <td class="price">1.500.000</td>
+                            <td>1</td>
+                            <td class="price">1.500.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-laptop"></i> Thin Clients</td>
+                            <td>Lenovo M710Q i3-7100T 8/256</td>
+                            <td class="price">1.350.000</td>
+                            <td>6</td>
+                            <td class="price">8.100.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-tools"></i> Setup Service</td>
+                            <td>RDP + KVM + On-Site Installation (Jabodetabek)</td>
+                            <td class="price">5.000.000</td>
+                            <td>1</td>
+                            <td class="price">5.000.000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4"><i class="fas fa-calculator"></i> Optional Components Subtotal</td>
+                            <td class="price">20.900.000</td>
+                        </tr>
+                        <tr class="total-row" style="background: linear-gradient(to right, rgba(231, 76, 60, 0.2), transparent) !important;">
+                            <td colspan="4"><i class="fas fa-file-invoice-dollar"></i> Grand Total</td>
+                            <td class="price">50.263.750</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="configurator">
+            <h2><i class="fas fa-sliders-h"></i> Customize Your Configuration</h2>
+            
+            <div class="config-group">
+                <h3><i class="fas fa-desktop"></i> Graphics Card Options</h3>
+                <div class="select-container">
+                    <label for="gpu-select">Select GPU:</label>
+                    <select id="gpu-select" onchange="updateGPU()">
+                        <option value="RTX 4060 Asus Dual V2|5500000">RTX 4060 Asus Dual V2 - Rp5.500.000</option>
+                        <option value="RTX 3060 Second Evga|3100000">RTX 3060 Second Evga - Rp3.100.000</option>
+                        <option value="RTX 3060 Second MSI Gaming|3300000">RTX 3060 Second MSI Gaming - Rp3.300.000</option>
+                        <option value="RTX 3060 New Asus Dual v2|4900000">RTX 3060 New Asus Dual v2 - Rp4.900.000</option>
+                        <option value="RTX 5060 Asus Dual|5959000">RTX 5060 Asus Dual - Rp5.959.000</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="config-group">
+                <h3><i class="fas fa-cogs"></i> Service Level Options</h3>
+                <div class="select-container">
+                    <label for="service-select">Select Service:</label>
+                    <select id="service-select" onchange="updateService()">
+                        <option value="Standard Build + Stress Test + Tuning + 6M Warranty|8000000">Standard - Rp8.000.000</option>
+                        <option value="Basic Build + Basic Test + 3M Warranty|5000000">Basic - Rp5.000.000</option>
+                        <option value="Premium Enterprise Build + Full Test + Tuning + 12M Warranty|11500000">Premium Enterprise - Rp11.500.000</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button class="btn btn-primary" onclick="exportConfig()">
+                    <i class="fas fa-file-export"></i> Export Configuration
+                </button>
+                <button class="btn btn-success" onclick="resetConfig()">
+                    <i class="fas fa-redo"></i> Reset to Default
+                </button>
+            </div>
+        </div>
+        
+        <div class="summary">
+            <h2><i class="fas fa-receipt"></i> Configuration Summary</h2>
+            <p>Your customized server setup with selected options:</p>
+            <div class="total-amount" id="total-amount">Rp 50.263.750</div>
+            <p>All components include manufacturer warranty and our quality assurance</p>
+        </div>
+        
+        <footer>
+            <p>© 2023 Server Solutions. All rights reserved.</p>
+            <p>Contact us for any questions or custom requirements</p>
+        </footer>
+    </div>
+
+    <script>
+        // Configuration data
+        let config = {
+            gpu: {
+                name: "RTX 4060 Asus Dual V2",
+                price: 5500000
+            },
+            service: {
+                name: "Standard Build + Stress Test + Tuning + 6M Warranty",
+                price: 8000000
+            }
+        };
+        
+        // Format number as Rupiah
+        function formatRupiah(number) {
+            return "Rp " + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        
+        // Parse Rupiah string to number
+        function parseRupiah(rupiah) {
+            return parseInt(rupiah.replace(/\D/g, ''));
+        }
+        
+        // Update GPU selection
+        function updateGPU() {
+            const gpuSelect = document.getElementById('gpu-select');
+            const selectedOption = gpuSelect.options[gpuSelect.selectedIndex];
+            const [gpuName, gpuPrice] = selectedOption.value.split('|');
+            
+            config.gpu.name = gpuName;
+            config.gpu.price = parseInt(gpuPrice);
+            
+            // Update GPU row
+            const gpuRow = document.getElementById('gpu-row');
+            gpuRow.cells[1].textContent = gpuName;
+            gpuRow.cells[2].textContent = formatRupiah(gpuPrice);
+            gpuRow.cells[4].textContent = formatRupiah(gpuPrice);
+            
+            // Update total
+            updateTotals();
+        }
+        
+        // Update service selection
+        function updateService() {
+            const serviceSelect = document.getElementById('service-select');
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+            const [serviceName, servicePrice] = selectedOption.value.split('|');
+            
+            config.service.name = serviceName;
+            config.service.price = parseInt(servicePrice);
+            
+            // Update service row
+            const serviceRow = document.getElementById('service-row');
+            serviceRow.cells[1].textContent = serviceName;
+            serviceRow.cells[2].textContent = formatRupiah(servicePrice);
+            serviceRow.cells[4].textContent = formatRupiah(servicePrice);
+            
+            // Update total
+            updateTotals();
+        }
+        
+        // Update all totals
+        function updateTotals() {
+            // Calculate core build subtotal
+            let coreSubtotal = 0;
+            const coreRows = document.querySelectorAll('#build-table tbody tr:not(.total-row)');
+            coreRows.forEach(row => {
+                const priceText = row.cells[4].textContent;
+                const price = parseRupiah(priceText);
+                coreSubtotal += price;
+            });
+            
+            // Update core build subtotal
+            const coreSubtotalRow = document.querySelector('#build-table .total-row');
+            coreSubtotalRow.cells[1].textContent = formatRupiah(coreSubtotal);
+            
+            // Optional components subtotal (fixed)
+            const optionalSubtotal = 20900000;
+            
+            // Calculate grand total
+            const grandTotal = coreSubtotal + optionalSubtotal;
+            
+            // Update optional components subtotal
+            const optionalSubtotalRow = document.querySelector('#optional-table tbody .total-row:first-child');
+            optionalSubtotalRow.cells[1].textContent = formatRupiah(optionalSubtotal);
+            
+            // Update grand total
+            const grandTotalRow = document.querySelector('#optional-table tbody .total-row:last-child');
+            grandTotalRow.cells[1].textContent = formatRupiah(grandTotal);
+            
+            // Update summary
+            document.getElementById('total-amount').textContent = formatRupiah(grandTotal);
+        }
+        
+        // Export configuration to text file
+        function exportConfig() {
+            // Get current configuration details
+            const coreRows = document.querySelectorAll('#build-table tbody tr:not(.total-row)');
+            const optionalRows = document.querySelectorAll('#optional-table tbody tr:not(.total-row)');
+            
+            let content = "SERVER SETUP CONFIGURATION\n";
+            content += "==========================\n\n";
+            
+            content += "CORE BUILD COMPONENTS:\n";
+            content += "----------------------\n";
+            coreRows.forEach(row => {
+                const cells = row.cells;
+                content += `${cells[0].textContent}: ${cells[1].textContent} - ${cells[4].textContent}\n`;
+            });
+            
+            // Add core subtotal
+            const coreSubtotal = document.querySelector('#build-table .total-row').cells[1].textContent;
+            content += `\nCore Build Subtotal: ${coreSubtotal}\n\n`;
+            
+            content += "OPTIONAL COMPONENTS:\n";
+            content += "-------------------\n";
+            optionalRows.forEach(row => {
+                const cells = row.cells;
+                content += `${cells[0].textContent}: ${cells[1].textContent} - ${cells[4].textContent}\n`;
+            });
+            
+            // Add optional subtotal and grand total
+            const optionalSubtotal = document.querySelector('#optional-table tbody .total-row:first-child').cells[1].textContent;
+            const grandTotal = document.querySelector('#optional-table tbody .total-row:last-child').cells[1].textContent;
+            
+            content += `\nOptional Components Subtotal: ${optionalSubtotal}\n`;
+            content += `GRAND TOTAL: ${grandTotal}\n\n`;
+            
+            content += "CUSTOMIZED OPTIONS:\n";
+            content += "-------------------\n";
+            content += `Graphics Card: ${config.gpu.name} - ${formatRupiah(config.gpu.price)}\n`;
+            content += `Service Level: ${config.service.name} - ${formatRupiah(config.service.price)}\n\n`;
+            
+            content += "Generated on: " + new Date().toLocaleString('id-ID') + "\n";
+            content += "Thank you for choosing our server setup services!";
+            
+            // Create and download file
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'server-setup-configuration.txt';
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        }
+        
+        // Reset configuration to default
+        function resetConfig() {
+            // Reset GPU
+            document.getElementById('gpu-select').selectedIndex = 0;
+            config.gpu = {
+                name: "RTX 4060 Asus Dual V2",
+                price: 5500000
+            };
+            
+            // Reset service
+            document.getElementById('service-select').selectedIndex = 0;
+            config.service = {
+                name: "Standard Build + Stress Test + Tuning + 6M Warranty",
+                price: 8000000
+            };
+            
+            // Update display
+            updateGPU();
+            updateService();
+            
+            // Show confirmation
+            alert("Configuration has been reset to default values.");
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTotals();
+        });
+    </script>
+</body>
+</html>
