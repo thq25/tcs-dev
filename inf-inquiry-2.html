@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Local Processing Intranet Infrastructure Installation | Tulus Computing Solutions</title>
+  <meta name="description" content="Configurator untuk instalasi infrastruktur intranet lokal yang robust, reliable, dan cepat. Siap deploy." />
+  <style>
+    /* ===== Design Tokens ===== */
+    :root{
+      --brand:#0ea5e9; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; --white:#fff; --danger:#ef4444; --ok:#16a34a
+    }
+
+    /* ===== Base ===== */
+    html,body{height:100%}
+    html{box-sizing:border-box}
+    *,*::before,*::after{box-sizing:inherit}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Motion respect */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important}
+    }
+
+    /* ===== Layout ===== */
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+
+    .header{background:var(--white);border-bottom:1px solid var(--line)}
+    .header .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 16px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .brand .bar{width:12px;height:28px;border-radius:4px;background:var(--brand)}
+    h1{font-size:22px;margin:0}
+
+    .hero{background:var(--white);border:1px solid var(--line);border-radius:14px;margin:18px auto;padding:18px}
+    .hero h2{font-size:18px;margin:0 0 6px}
+    .hero p{margin:0;color:var(--muted);line-height:1.6}
+
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--white);color:#0f172a;font-weight:600;cursor:pointer;user-select:none}
+    .btn:hover{background:#f3f4f6}
+    .btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
+    .btn-primary{background:var(--brand);border-color:var(--brand);color:var(--white)}
+    .btn-primary:hover{filter:brightness(.97)}
+    .btn-ghost{border-color:var(--line);color:#334155;background:var(--white)}
+    .btn-danger{border-color:var(--danger);color:var(--danger)}
+
+    .section{margin:18px 0}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .section-title h3{margin:0;font-size:18px}
+    .subtle{font-size:12px;color:var(--muted)}
+
+    .picker{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    thead th{background:rgba(14,165,233,.08);text-align:left;padding:10px;border-bottom:1px solid var(--line);color:#0f172a}
+    tbody td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+    tbody tr:hover{background:#f9fafb}
+    .cat-badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#0f172a}
+    .cat-dot{width:10px;height:10px;border-radius:999px;background:var(--brand)}
+    .price{font-weight:700}
+    .qty{width:76px;padding:6px 8px;border:1px solid var(--line);border-radius:8px}
+
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+
+    .cart{position:sticky;top:18px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px}
+    .cart h4{margin:0 0 8px;font-size:16px}
+    .cart-empty{color:var(--muted);font-size:13px}
+    .cart-line{display:flex;gap:8px;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+    .cart-line:last-child{border-bottom:none}
+    .cart-line .meta{font-size:12px;color:var(--muted)}
+    .totals{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+    .totals .row{display:flex;justify-content:space-between;font-size:14px;margin:6px 0}
+
+    .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px}
+    .field{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin:6px 0}
+    .note{font-size:12px;color:var(--muted)}
+    .footer{font-size:12px;color:var(--muted);text-align:left;margin:18px 0}
+
+    .muted{color:var(--muted)}
+    .error{display:none;font-size:12px;color:var(--danger);margin-top:4px}
+    .ok{display:none;font-size:12px;color:var(--ok);margin-top:4px}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="wrap">
+      <div class="brand" aria-label="Tulus Computing Solutions">
+        <div class="bar" aria-hidden="true"></div>
+        <h1>Local Processing Intranet Infrastructure Installation</h1>
+      </div>
+      <a href="/" aria-label="Kembali ke tuluscs.com">tuluscs.com</a>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title">Built for reliability. Priced for reality.</h2>
+      <p>Kami menyusun opsi terkurasi agar Anda mendapatkan sistem intranet lokal yang kuat, terjangkau, dan siap masa depan. Fokus kami: performa, keandalan, serta kemudahan instalasi dan pemeliharaan. Pilih komponen yang Anda perlukan atau gunakan preset rekomendasi, lalu kirimkan inquiry.</p>
+    </section>
+
+    <section class="section" aria-labelledby="rec-title">
+      <div class="section-title">
+        <h3 id="rec-title">Recommended Options</h3>
+        <div class="subtle">Klik untuk mengisi keranjang otomatis. Masih bisa diedit.</div>
+      </div>
+      <div class="grid">
+        <article class="card" aria-label="Preset Recommended — Value dan Future Proof">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;">
+            <div>
+              <div style="font-weight:700;">Recommended — Value dan Future Proof</div>
+              <div class="subtle" style="margin-top:4px;">Setup sederhana, hemat ruang, inti 2.5GbE, performa NAS solid.</div>
+            </div>
+            <button class="btn btn-ghost" type="button" data-apply-preset="1">Apply</button>
+          </div>
+          <ul class="subtle" style="margin:8px 0 0 18px;">
+            <li>Desktop Open Rack — Rp2.000.000,00</li>
+            <li>MIKROTIK CRS310-8G+2S+IN — Rp3.686.743,00</li>
+            <li>Cat6 Cable — Rp2.190.000,00</li>
+            <li>Asustor AS6704T 4 Bay — Rp11.300.000,00</li>
+            <li>Network Infra. Installation — Rp3.000.000,00</li>
+            <li>Reliability Test dan Tuning — Rp2.500.000,00</li>
+            <li>NAS Setup — Rp1.750.000,00</li>
+          </ul>
+        </article>
+        <article class="card" aria-label="Preset Budget dan Quick Setup">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;">
+            <div>
+              <div style="font-weight:700;">Budget dan Quick Setup</div>
+              <div class="subtle" style="margin-top:4px;">Fokus fungsi inti terlebih dahulu. Tanpa rack, letakkan di meja.</div>
+            </div>
+            <button class="btn btn-ghost" type="button" data-apply-preset="2">Apply</button>
+          </div>
+          <ul class="subtle" style="margin:8px 0 0 18px;">
+            <li>MIKROTIK CRS310-8G+2S+IN — Rp3.686.743,00</li>
+            <li>Network Infra. Installation — Rp3.000.000,00</li>
+            <li>Cat6 Cable — Rp2.190.000,00</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section grid" aria-labelledby="picker-title">
+      <div>
+        <div class="section-title"><h3 id="picker-title">Components Picker</h3><div class="subtle">Baris penuh, format tabel. Dapat menambah beberapa item per kategori.</div></div>
+        <div id="picker" aria-live="polite"></div>
+
+        <div class="card" style="margin-top:16px;">
+          <h3 style="margin:0 0 8px;font-size:16px;">Service Notes dan Assumptions</h3>
+          <ul class="subtle" style="margin:0 0 0 18px;line-height:1.6;">
+            <li>Harga acuan Rupiah dan dapat berubah sesuai stok serta kondisi lokasi.</li>
+            <li>Instalasi sudah termasuk konfigurasi dasar kecuali tertulis lain.</li>
+            <li>Akses jarak jauh aman direkomendasikan dengan WireGuard dan hardening firewall.</li>
+            <li>Kebutuhan khusus seperti 24 port, uplink 10GbE, CCTV PoE, atau Wi‑Fi AP dapat disesuaikan.</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside>
+        <div class="cart" aria-labelledby="cart-title">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+            <h4 id="cart-title">Your Selection</h4>
+            <button class="btn" type="button" id="btnClear">Clear</button>
+          </div>
+          <div id="cartEmpty" class="cart-empty">Belum ada item. Tambahkan dari tabel komponen atau gunakan preset.</div>
+          <div id="cartList" style="display:none"></div>
+          <div id="totals" class="totals" style="display:none">
+            <div class="row"><span>Subtotal</span><span id="subtotal">Rp0,00</span></div>
+            <div class="row" style="font-weight:700"><span>Estimated Total</span><span id="grandtotal">Rp0,00</span></div>
+            <button class="btn btn-primary" style="width:100%;margin-top:10px" type="button" id="btnInquiry">Send Inquiry</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <h4 style="margin:0 0 8px">Inquiry Details</h4>
+          <form id="formInquiry" novalidate>
+            <label class="subtle" for="custName">Nama</label>
+            <input id="custName" class="field" name="name" placeholder="Nama" autocomplete="name" />
+            <span class="error" id="errName">Nama wajib diisi.</span>
+
+            <label class="subtle" for="custCompany">Perusahaan</label>
+            <input id="custCompany" class="field" name="company" placeholder="Perusahaan" autocomplete="organization" />
+
+            <label class="subtle" for="custEmail">Email</label>
+            <input id="custEmail" class="field" name="email" placeholder="Email" inputmode="email" autocomplete="email" />
+            <span class="error" id="errEmail">Email tidak valid.</span>
+
+            <label class="subtle" for="custPhone">No. WhatsApp</label>
+            <input id="custPhone" class="field" name="phone" placeholder="No. WhatsApp" inputmode="tel" autocomplete="tel" />
+            <span class="error" id="errPhone">Nomor WhatsApp tidak valid.</span>
+
+            <label class="subtle" for="custNotes">Catatan</label>
+            <textarea id="custNotes" class="field" rows="3" placeholder="Catatan seperti kebutuhan port, jarak kabel, dan ruangan"></textarea>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px;">
+              <button class="btn" type="button" id="btnPreview">Preview Message</button>
+              <a id="waLink" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="display:none">Kirim via WhatsApp</a>
+              <a id="mailLink" href="#" class="btn" style="display:none;border-color:#7dd3fc;color:#0369a1">Kirim via Email</a>
+            </div>
+            <div class="note" style="margin-top:8px;">Kami akan menghubungi Anda untuk verifikasi dan penjadwalan instalasi.</div>
+            <div class="ok" id="okSaved">Keranjang disimpan di perangkat Anda.</div>
+          </form>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer">© <span id="year"></span> Tulus Computing Solutions — Bandung dan Jakarta</footer>
+  </main>
+
+  <script defer>
+    (function(){
+      'use strict';
+
+      // ===== Utilities =====
+      const moneyFmt = new Intl.NumberFormat('id-ID', { style:'currency', currency:'IDR', currencyDisplay:'symbol' });
+      const money = (n)=> moneyFmt.format(n);
+      const nl = ()=>'\n';
+
+      const qs = (sel, parent=document)=> parent.querySelector(sel);
+      const qsa = (sel, parent=document)=> Array.from(parent.querySelectorAll(sel));
+
+      const WA_NUMBER = '6280000000000'; // TODO: set nomor WA produksi
+      const MAIL_TO = 'sales@tuluscs.com';
+
+      const state = {
+        cart: new Map(),
+      };
+
+      // ===== Data (unchanged from source) =====
+      const DATA = [
+        { category:'Rack Option', items:[
+          { sku:'rack-desktop-open', name:'Desktop Open Rack', desc:'Desktop Open Rack 10u, PDU 6 Socket, Cable Manager, Shelf, Installation', price:2000000 },
+          { sku:'rack-standing-open', name:'Standing Open Rack', desc:'OR42 Open Rack 42u, PDU 6 Socket, Cable Manager, Shelf, Installation', price:4100000 },
+          { sku:'rack-wallmount-box', name:'Wallmount Box', desc:'OR42 Open Rack 42u, PDU 6 Socket, Cable Manager, Shelf, Installation', price:4300000 }
+        ]},
+        { category:'Switch Option', items:[
+          { sku:'sw-tenda-teg5310p', name:'Tenda TEG5310P-8-150W POE L3 1G', desc:'8 Port 1GbE plus 2 1Gb SFP L3 POE', price:1702000 },
+          { sku:'sw-mikrotik-crs310', name:'MIKROTIK CRS310-8G+2S+IN L3 2.5G', desc:'8 Port 2.5GbE plus 2 10Gb SFP plus L3', price:3686743 },
+          { sku:'sw-cisco-cbs350-8t', name:'Cisco CBS350-8T-E-2G-EU L2 1G', desc:'8 Port 1GbE plus 2 10Gb SFP plus L2', price:4750000 },
+          { sku:'sw-ubnt-usw-pro-24', name:'UBIQUITI USW-PRO-24 L3 1G', desc:'24 Port 1GbE plus 2 10Gb SFP plus L3', price:7056400 }
+        ]},
+        { category:'Network Cabling', items:[
+          { sku:'cable-cat6-bundle', name:'Cat6 Cable', desc:'Dukungan 10GbE, 4 client plus 1 WS plus 1 NAS plus ducting', price:2190000 }
+        ]},
+        { category:'NAS Option', items:[
+          { sku:'nas-qnap-ts464-8g', name:'QNAP TS-464 8G', desc:'Value bagus, fleksibel, hardware kuat untuk throughput', price:13350000 },
+          { sku:'nas-syno-ds923', name:'Synology DS923+', desc:'Ekosistem software kuat, 1 kali 2.5G', price:12160000 },
+          { sku:'nas-syno-ds925', name:'Synology DS925+', desc:'Ekosistem software kuat, HDD eksklusif, 2 kali 2.5G', price:10545000 },
+          { sku:'nas-asustor-as6704t', name:'Asustor AS6704T 4 Bay', desc:'Nilai kuat, banyak slot NVMe, 2 kali 2.5G', price:11300000 },
+          { sku:'nas-aoostar-wtr-max', name:'Aoostar WTR MAX', desc:'Untuk enthusiast, daya tinggi, banyak bay, fleksibilitas tertinggi, butuh konfigurasi lebih, 2 kali 2.5GbE plus 2 kali 10G SFP plus', price:15000000 }
+        ]},
+        { category:'Service Option', items:[
+          { sku:'svc-net-install', name:'Network Infra. Installation', desc:'Instalasi, manajemen kabel, konfigurasi dasar (initial dan IP)', price:3000000 },
+          { sku:'svc-reliability', name:'Reliability Test dan Tuning', desc:'Uji koneksi lokal dan tuning, dukungan 2.5G penuh, LACP, iperf3, validasi transfer', price:2500000 },
+          { sku:'svc-nas-setup', name:'NAS Setup', desc:'RAID, backup, konektivitas lokal, caching, kontrol reliabilitas', price:1750000 },
+          { sku:'svc-nas-setup-aoostar', name:'NAS Setup untuk Aoostar WTR MAX', desc:'Pengaturan NAS khusus WTR MAX', price:3000000 },
+          { sku:'svc-remote-ubuntu', name:'Remote Desktop Control Ubuntu', desc:'Multi user, server Ubuntu, dukungan 3 bulan', price:3000000 },
+          { sku:'svc-remote-windows', name:'Remote Desktop Control Windows', desc:'Multi user RDP Windows, dukungan 3 bulan', price:4000000 },
+          { sku:'svc-secure-remote', name:'Secure Network Remote Access', desc:'WireGuard VPN, domain, firewall, CDN, dukungan 3 bulan', price:15000000 }
+        ]}
+      ];
+
+      // ===== Persistence =====
+      const STORAGE_KEY = 'tcs_intranet_cart_v1';
+      const loadCart = ()=>{
+        try{
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if(!raw) return;
+          const arr = JSON.parse(raw);
+          state.cart = new Map(arr.map(x=>[x.sku,x]));
+        }catch(e){ console.warn('Failed to load cart', e); }
+      };
+      const saveCart = ()=>{
+        try{
+          const arr = Array.from(state.cart.values());
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+          showSaved();
+        }catch(e){ console.warn('Failed to save cart', e); }
+      };
+
+      function showSaved(){
+        const el = qs('#okSaved');
+        if(!el) return;
+        el.style.display='block';
+        setTimeout(()=>{ el.style.display='none'; }, 1200);
+      }
+
+      // ===== Picker =====
+      const picker = qs('#picker');
+      function buildPicker(){
+        picker.innerHTML = '';
+        const frag = document.createDocumentFragment();
+        for(const group of DATA){
+          const box = document.createElement('div');
+          box.className = 'picker';
+          box.style.marginBottom = '14px';
+          box.innerHTML = `
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:180px"><span class="cat-badge"><span class="cat-dot"></span>${group.category}</span></th>
+                  <th>Item</th>
+                  <th>Deskripsi</th>
+                  <th style="width:140px">Harga</th>
+                  <th style="width:90px">Qty</th>
+                  <th style="width:90px">Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>`;
+          const tbody = box.querySelector('tbody');
+          for(const it of group.items){
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td></td>
+              <td><div style="font-weight:600">${escapeHtml(it.name)}</div></td>
+              <td><div class="muted">${escapeHtml(it.desc)}</div></td>
+              <td class="price">${money(it.price)}</td>
+              <td><input type="number" min="1" value="1" class="qty" aria-label="Jumlah untuk ${escapeHtml(it.name)}"></td>
+              <td><button class="btn" type="button" data-sku="${it.sku}">Add</button></td>`;
+            tbody.appendChild(tr);
+          }
+          frag.appendChild(box);
+        }
+        picker.appendChild(frag);
+      }
+
+      // Delegated add buttons
+      picker.addEventListener('click', (e)=>{
+        const btn = e.target.closest('button[data-sku]');
+        if(!btn) return;
+        const tr = btn.closest('tr');
+        const input = tr.querySelector('input.qty');
+        const qty = clampInt(input.value, 1, 999);
+        input.value = qty;
+        addToCart(btn.dataset.sku, qty);
+      });
+
+      // ===== Cart ops =====
+      function findItem(sku){
+        for(const g of DATA){
+          const it = g.items.find(x=>x.sku===sku);
+          if(it) return { sku:it.sku, name:it.name, desc:it.desc, price:it.price, category:g.category };
+        }
+        return null;
+      }
+
+      function addToCart(sku, qty){
+        const it = findItem(sku); if(!it) return;
+        const prev = state.cart.get(sku) || { sku:it.sku, name:it.name, price:it.price, category:it.category, qty:0 };
+        prev.qty = Math.max(0, prev.qty + qty);
+        if(prev.qty<=0){ state.cart.delete(sku); } else { state.cart.set(sku, prev); }
+        renderCart();
+        saveCart();
+      }
+      function removeFromCart(sku){ state.cart.delete(sku); renderCart(); saveCart(); }
+      function clearCart(){ state.cart.clear(); renderCart(); saveCart(); }
+
+      const cartList = qs('#cartList');
+      const cartEmpty = qs('#cartEmpty');
+      const totals = qs('#totals');
+
+      function renderCart(){
+        cartList.innerHTML = '';
+        if(state.cart.size===0){
+          cartEmpty.style.display='block'; cartList.style.display='none'; totals.style.display='none'; updateInquiryLinks(); return;
+        }
+        cartEmpty.style.display='none'; cartList.style.display='block'; totals.style.display='block';
+        let subtotal = 0;
+        const frag = document.createDocumentFragment();
+        for(const item of state.cart.values()){
+          const line = item.qty * item.price; subtotal += line;
+          const row = document.createElement('div'); row.className='cart-line';
+          row.innerHTML = `
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(item.name)}</div>
+              <div class="meta">${escapeHtml(item.category)} • ${money(item.price)} × ${item.qty}</div>
+            </div>
+            <div style="font-weight:700">${money(line)}</div>
+            <button class="btn btn-danger" style="padding:6px 10px" type="button" data-del="${item.sku}">Remove</button>`;
+          frag.appendChild(row);
+        }
+        cartList.appendChild(frag);
+        qs('#subtotal').textContent = money(subtotal);
+        qs('#grandtotal').textContent = money(subtotal);
+        updateInquiryLinks();
+      }
+
+      cartList.addEventListener('click', (e)=>{
+        const del = e.target.closest('button[data-del]');
+        if(!del) return;
+        removeFromCart(del.dataset.del);
+      });
+
+      // ===== Presets =====
+      function applyPreset(id){
+        clearCart();
+        const addSkus = (skus)=>{
+          for(const s of skus){ const it=findItem(s); if(it) state.cart.set(s,{ sku:it.sku, name:it.name, price:it.price, category:it.category, qty:1 }); }
+        };
+        if(id===1){
+          addSkus(['rack-desktop-open','sw-mikrotik-crs310','cable-cat6-bundle','nas-asustor-as6704t','svc-net-install','svc-reliability','svc-nas-setup']);
+        } else if(id===2){
+          addSkus(['sw-mikrotik-crs310','svc-net-install','cable-cat6-bundle']);
+        }
+        renderCart();
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+
+      document.addEventListener('click', (e)=>{
+        const btnPreset = e.target.closest('[data-apply-preset]');
+        if(btnPreset){ applyPreset(parseInt(btnPreset.dataset.applyPreset,10)); }
+      });
+
+      // ===== Inquiry build & validation =====
+      function buildSummary(){
+        const lines = []; let total = 0;
+        for(const item of state.cart.values()){ const line=item.qty*item.price; total+=line; lines.push(`- ${item.category} | ${item.name} | ${money(item.price)} × ${item.qty} = ${money(line)}`); }
+        return { text: lines.join(nl()), total: money(total) };
+      }
+
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+      const phoneRe = /^\+?\d{8,15}$/; // simple guard
+
+      function validate(){
+        let ok = true;
+        const name = qs('#custName').value.trim();
+        const email = qs('#custEmail').value.trim();
+        const phone = qs('#custPhone').value.trim();
+        // name
+        toggle('#errName', name.length===0, ()=> ok=false );
+        // email
+        if(email){ toggle('#errEmail', !emailRe.test(email), ()=> ok=false ); } else { qs('#errEmail').style.display='none'; }
+        // phone
+        if(phone){ toggle('#errPhone', !phoneRe.test(phone), ()=> ok=false ); } else { qs('#errPhone').style.display='none'; }
+        return ok;
+      }
+
+      function toggle(sel, condition, onBad){ const el=qs(sel); if(!el) return; el.style.display = condition? 'block':'none'; if(condition && onBad) onBad(); }
+
+      function updateInquiryLinks(forceShow=false){
+        const name = qs('#custName').value.trim();
+        const company = qs('#custCompany').value.trim();
+        const email = qs('#custEmail').value.trim();
+        const phone = qs('#custPhone').value.trim();
+        const notes = qs('#custNotes').value.trim();
+        const sum = buildSummary();
+        const header = 'Inquiry: Local Processing Intranet Infrastructure Installation';
+        const cust = `${nl()}${nl()}Nama: ${name}${nl()}Perusahaan: ${company}${nl()}Email: ${email}${nl()}WhatsApp: ${phone}`;
+        const note = notes ? `${nl()}Catatan: ${notes}` : '';
+        const body = `${header}${nl()}${nl()}Rincian:${nl()}${sum.text}${nl()}${nl()}Perkiraan Total: ${sum.total}${cust}${note}`;
+        const encoded = encodeURIComponent(body);
+        const waUrl = `https://wa.me/${WA_NUMBER}?text=${encoded}`;
+        const mailUrl = `mailto:${MAIL_TO}?subject=${encodeURIComponent(header)}&body=${encoded}`;
+        const wa = qs('#waLink'); const em = qs('#mailLink');
+        if(forceShow){ wa.href=waUrl; em.href=mailUrl; wa.style.display='inline-flex'; em.style.display='inline-flex'; }
+        else if(state.cart.size===0){ wa.style.display='none'; em.style.display='none'; }
+      }
+
+      function previewInquiry(){ if(!validate()){ return; } updateInquiryLinks(true); }
+
+      function openInquiry(){ if(!validate()){ return; } updateInquiryLinks(true); qs('#waLink').focus(); }
+
+      // ===== Helpers =====
+      function clampInt(v, min, max){ const n = parseInt(String(v||'').replace(/[^\d-]/g,''),10); if(isNaN(n)) return min; return Math.max(min, Math.min(max, n)); }
+      function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]) ); }
+
+      // ===== Wire up =====
+      qs('#btnClear').addEventListener('click', clearCart);
+      qs('#btnInquiry').addEventListener('click', openInquiry);
+      qs('#btnPreview').addEventListener('click', previewInquiry);
+      qs('#formInquiry').addEventListener('submit', (e)=>{ e.preventDefault(); openInquiry(); });
+
+      qs('#year').textContent = new Date().getFullYear();
+      buildPicker();
+      loadCart();
+      renderCart();
+    })();
+  </script>
+</body>
+</html>
